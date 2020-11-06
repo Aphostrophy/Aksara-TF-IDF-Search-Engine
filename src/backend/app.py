@@ -11,7 +11,7 @@ def what_ismy_basedir():
 
 @app.route('/api/cerita/', methods=['GET'])
 
-def hello_worpegeld():
+def hello_world():
     cerita = request.args.get('cerita', default="", type=str)
     data = open(os.path.join(basedir,'static/'+cerita)).read()
     return data
