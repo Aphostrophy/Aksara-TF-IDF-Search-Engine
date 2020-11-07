@@ -1,7 +1,9 @@
 import nltk
+from bs4 import BeautifulSoup
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
+
 
 porter = PorterStemmer()
 
@@ -19,13 +21,20 @@ def stemkata(kata):
     return "".join(stem_kata)
 
 
-file = open("testing\data-science-wiki.txt")
-LineList = file.readlines()
+file = open("./testing/threeFeathers.html", "r")
+print(file)
+file = BeautifulSoup(file, 'html.parser')
+print(file)
 
-print(LineList[0])
+myLineList = []
+for line in file:
+    lineFilter = stemkata(line)
+    myLineList.append(lineFilter)
 
-print("Stemmed kata")
+for line in myLineList:
+    print(line)
+# print("Stemmed kata")
 
-x = stemkata(LineList[0])
+# x = stemkata(LineList[0])
 
-print(x)
+# print(x)
