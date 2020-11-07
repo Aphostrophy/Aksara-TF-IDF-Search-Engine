@@ -1,8 +1,10 @@
 import nltk
-from bs4 import BeautifulSoup
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
+from bs4 import BeautifulSoup
+import re
+import string
 
 porter = PorterStemmer()
 
@@ -11,7 +13,6 @@ stopWords = set(stopwords.words('english'))
 
 def stemkata(kata):
     token_words = word_tokenize(kata)
-    token_words
     stem_kata = []
     for word in token_words:
         if not word in stopWords:
@@ -20,14 +21,29 @@ def stemkata(kata):
     return "".join(stem_kata)
 
 
-file = open("testing/threeFeathers.html").read()
+file = open("./static/threePrincess.html").read()
 
-myLineList = []
-# for i in textFile.find('div', {'class': 'most__wrap'}).find_all('a'):
-#     i['href'] = i['href'] + '?page=all'
-#     link.append(i['href'])
-for line in file:
-    lineFilter = stemkata(line)
-    myLineList.append(lineFilter)
+cleantext = BeautifulSoup(file, "html.parser").text
 
-print(file)
+print("Stemmed kata")
+x = stemkata(cleantext)
+clean_document = []
+for document in x:
+    document = re.sub(r'[^\x00-\x7F]+', ' ', document)
+    document = re.sub(r'@\w+', '', document)
+    document = document.lower()
+    document = re.sub(r'[%s]' % re.escape(
+        string.punctuation), ' ', document)
+    document = re.sub(r'\s{2,}', ' ', document)
+    clean_document.append(document)
+
+
+def convert(str):
+    new = ""
+    for x in str:
+        new += x
+    return new
+
+
+docs = convert(clean_document)
+print(docs)
