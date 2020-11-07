@@ -22,7 +22,6 @@ def stemkata(kata):
 file = open("testing\data-science-wiki.txt")
 LineList = file.readlines()
 
-
 print(LineList[0])
 
 print("Stemmed kata")
