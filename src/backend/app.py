@@ -4,6 +4,14 @@ import os
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+@app.route('/', methods=['GET'])
+
+def dir():
+    files = os.listdir('./static')
+    for elem in files:
+        print(elem)
+    return 'Files printed on console'
+
 @app.route('/api', methods=['GET'])
 
 def what_ismy_basedir():
