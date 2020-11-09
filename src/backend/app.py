@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 def dir():
     files = os.listdir('./static')
+    D = [] #matriks kolom dari dokumen
     for elem in files:
         print(elem)
     return 'Files printed on console'
