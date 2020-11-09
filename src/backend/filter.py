@@ -1,3 +1,4 @@
+from os import write
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import PorterStemmer
@@ -5,6 +6,7 @@ from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
 import re
 import string
+from CountWords import Countwords
 
 porter = PorterStemmer()
 
@@ -23,19 +25,20 @@ def stemkata(kata):
 
 file = open("./static/threePrincess.html").read()
 
-cleantext = BeautifulSoup(file, "html.parser").text
 
-print("Stemmed kata")
-x = stemkata(cleantext)
-clean_document = []
-for document in x:
-    document = re.sub(r'[^\x00-\x7F]+', ' ', document)
-    document = re.sub(r'@\w+', '', document)
-    document = document.lower()
-    document = re.sub(r'[%s]' % re.escape(
-        string.punctuation), ' ', document)
-    document = re.sub(r'\s{2,}', ' ', document)
-    clean_document.append(document)
+def Cleaningkata(file):
+    cleantext = BeautifulSoup(file, "html.parser").text
+    x = stemkata(cleantext)
+    clean_document = []
+    for document in x:
+        document = re.sub(r'[^\x00-\x7F]+', ' ', document)
+        document = re.sub(r'@\w+', '', document)
+        document = document.lower()
+        document = re.sub(r'[%s]' % re.escape(
+            string.punctuation), ' ', document)
+        document = re.sub(r'\s{2,}', ' ', document)
+        clean_document.append(document)
+    return clean_document
 
 
 def convert(str):
@@ -45,5 +48,7 @@ def convert(str):
     return new
 
 
-docs = convert(clean_document)
-print(docs)
+docs = convert(Cleaningkata(file))
+docs = re.split('\s+', docs)
+
+print(Countwords(docs))
