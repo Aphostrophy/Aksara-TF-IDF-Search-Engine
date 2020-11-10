@@ -1,13 +1,11 @@
 import os
-from filtering import Cleaningkata, convert
-from CountWords import Countwords
+from filtering import Cleaningkata, Cleaningquery, convert, Countwords
 
-basedir = os.path.abspath(os.path.dirname(__file__)) + "/static"
-multFiles = []
-uniqueTerms = dict() #Declare Empty Dict untuk nyimpen semua unique terms
-fullMatrix = [] #array of dict
-
-def generateTermsFromFiles(basedir,uniqueTerms,multFiles):
+def generateTermsFromFiles(basedir):
+    basedir = basedir + "/static"
+    multFiles = []
+    uniqueTerms = dict() #Declare Empty Dict untuk nyimpen semua unique terms
+    fullMatrix = [] #array of dict
     for filenames in os.listdir(basedir):
         if filenames.endswith(".html"):
             joinpath = os.path.join(basedir, filenames)
@@ -15,15 +13,18 @@ def generateTermsFromFiles(basedir,uniqueTerms,multFiles):
             docs = convert(Cleaningkata(file))
             docs = docs.split()
             docs = Countwords(docs)
-            uniqueTerms.update(docs)
+            termDocs = docs.copy()
+            termDocs = {x:0 for x in termDocs} #Dictionary comprehension
+            uniqueTerms.update(termDocs)
             multFiles.append(docs)
         else:
             continue
+    return generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles)
 
 def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles):
     elem = dict()
     for keys in uniqueTerms:
-        elem[keys] = 1
+        elem[keys] = 0
     fullMatrix.append(elem)
     for docs in multFiles:
         elem = dict()
@@ -33,18 +34,31 @@ def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles):
             else: #keys not in docs
                 elem[keys]=0
         fullMatrix.append(elem)
-    
 
-generateTermsFromFiles(basedir,uniqueTerms,multFiles)
+    return [uniqueTerms, fullMatrix]
 
-generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles)
+def generateQueryVector(query):
+    docs = convert(Cleaningquery(query))
+    docs = docs.split()
+    return Countwords(docs)
+
+def updateTerms(fullMatrix,queryVector):
+    newFullMatrix= []
+    for docsDict in fullMatrix:
+        tempDocsDict = docsDict.copy()
+        docsDict = {x:0 for x in queryVector}
+        docsDict.update(tempDocsDict)
+        newFullMatrix.append(docsDict)
+        # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        # print(len(docsDict))
+    return newFullMatrix
 
 # for docs in multFiles:
 #     print("File: ")
 #     print(docs)
 
 # print(uniqueTerms)
-print(fullMatrix)
+# print(fullMatrix)
 
-for i in range(len(fullMatrix)):
-    print(len(fullMatrix[0]))
+# for i in range(len(fullMatrix)):
+#     print(len(fullMatrix[0]))
