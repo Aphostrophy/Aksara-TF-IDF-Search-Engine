@@ -8,7 +8,7 @@ import {
     Link
   } from "react-router-dom";
 
-function Page1(){
+function UploadPage(){
     return(
         <div className="Page1">
             <div className="box1">
@@ -26,4 +26,4 @@ function Page1(){
         </div>
     )
 }
-export default Page1
+export default UploadPage
