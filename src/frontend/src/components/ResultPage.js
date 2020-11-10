@@ -16,6 +16,7 @@ export default function ResultPage(props){
             })
             console.log(searchQuery);
             console.log(res);
+            setQueryResult(res);
         })()
     })
     return(
