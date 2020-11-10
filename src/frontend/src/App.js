@@ -5,6 +5,7 @@ import React,{useEffect} from 'react';
 import Header from './components/Header';
 import SearchPage from './components/SearchPage';
 import UploadPage from './components/UploadPage';
+import ResultPage from './components/ResultPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,8 +19,9 @@ function App() {
     <Router>
       <Header />
         <Switch>
-          <Route exact path='/' component={UploadPage} />
+          <Route exact path='/upload' component={UploadPage} />
           <Route exact path='/search' component={SearchPage} />
+          <Route exact path='/result' component={ResultPage} />
         </Switch>
     </Router>
     </div>

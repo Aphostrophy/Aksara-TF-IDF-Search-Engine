@@ -11,7 +11,8 @@ function Header(){
     return (
         <div className="navbar-aksara">
             <div className="pic"><div className="logofit"></div></div>
-            <div className="search"><Link to="/" className="button">Search</Link></div>
+            <div className="search"><Link to="/search" className="button">Search</Link></div>
+            <div className="upload"><Link to='/upload' className="button">Upload</Link></div>
             <div><Link to="/about"  className="button" >About</Link></div>
         </div>
     )
