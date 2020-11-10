@@ -48,7 +48,7 @@ def convert(str):
     return new
 
 
-docs = convert(Cleaningkata(file))
-docs = re.split('\s+', docs)
+# docs = convert(Cleaningkata(file))
+# docs = docs.split()
 
 # print(Countwords(docs))

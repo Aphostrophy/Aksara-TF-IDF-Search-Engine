@@ -17,12 +17,10 @@ function Page1(){
                     <div className="imgupload"></div>
                     <Uploader/>
                 </div>
-                <Router>
                 <div className="buttoncont">
                     <div className="contuploadbutton"><Link to="/upload" className="uploadbutton">Upload</Link></div>
                     <div className="contsearchbutton"><Link to="/search" className="searchbutton">Search</Link></div>
                 </div>
-                </Router>
             </div>
             <div className="Logogif"></div>
         </div>
