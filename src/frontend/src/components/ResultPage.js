@@ -14,11 +14,10 @@ export default function ResultPage(props){
                     query: searchQuery
                 }
             })
-            console.log(searchQuery);
             console.log(res);
             setQueryResult(res);
         })()
-    })
+    },[searchQuery])
     return(
         <>
             <div>TEST</div>

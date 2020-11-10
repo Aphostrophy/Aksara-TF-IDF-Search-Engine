@@ -1,6 +1,9 @@
 from flask import Flask, request
 from flask_cors import CORS
+from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms
+from vectorizer import sim
 import os
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -8,11 +11,21 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/api/search', methods=['GET'])
 
+# FullMatrix[0] = uniqueTerms
+
 def dir():
     query = request.args.get('query', default="", type=str)
-    D = [] #matriks kolom dari dokumen
-    print(query)
-    return 'Files printed on console'
+    [uniqueTerms, fullMatrix] = generateTermsFromFiles(basedir)
+    queryVector = generateQueryVector(query)
+    print(queryVector)
+    termsContainer = {x:queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
+    queryVector.update(termsContainer)
+    fullMatrix = updateTerms(fullMatrix,queryVector)
+    for i in range (1,len(fullMatrix)):
+        print(sim(queryVector, fullMatrix[i]))
+    # print('BBBBBBBBBBBBBBBBBBBBBBB')
+    # print(len(queryVector))
+    return json.dumps(fullMatrix[0])
 
 @app.route('/api/basedir', methods=['GET'])
 def what_ismy_basedir():
