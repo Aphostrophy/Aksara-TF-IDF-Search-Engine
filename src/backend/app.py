@@ -1,17 +1,20 @@
 from flask import Flask, request
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
+CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+@app.route('/api/search', methods=['GET'])
+
 def dir():
-    files = os.listdir('./static')
+    query = request.args.get('query', default="", type=str)
     D = [] #matriks kolom dari dokumen
-    for elem in files:
-        print(elem)
+    print(query)
     return 'Files printed on console'
 
-@app.route('/api', methods=['GET'])
+@app.route('/api/basedir', methods=['GET'])
 def what_ismy_basedir():
     return basedir
 

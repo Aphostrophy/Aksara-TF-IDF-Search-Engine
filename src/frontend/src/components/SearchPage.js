@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import './style.css'
-import { Link, Redirect } from "react-router-dom";
-import Axios from 'axios'
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 function SearchPage(){
 
     const [searchQuery, setSearchQuery] = useState("")
+    const history = useHistory();
 
     const handleChange= (e) => {
         e.preventDefault();
@@ -14,15 +14,9 @@ function SearchPage(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const endpoint = `${process.env.REACT_APP_URL}/search`;
-        Axios.get(endpoint,{
-            params: {
-                query: searchQuery
-            }
-        }).then((result)=>{
-            <Redirect to="/result" />
-        }).catch((err)=>{
-            alert(err);
+        history.push({
+            pathname: 'result',
+            state: { searchQuery: searchQuery }      
         })
     }
 
