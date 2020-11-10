@@ -21,6 +21,8 @@ function SearchPage(){
             }
         }).then((result)=>{
             <Redirect to="/result" />
+        }).catch((err)=>{
+            alert(err);
         })
     }
 
@@ -29,7 +31,7 @@ function SearchPage(){
             <div className="logopage2"></div>
             <div className="searchcont">
                 <div className="form">
-                    <form onSubmit={(e)=>handleSubmit}>
+                    <form onSubmit={(e)=>handleSubmit(e)}>
                         <label>
                             <input className="searchbox" value={searchQuery} onChange={(e)=>handleChange(e)}/>
                         </label>
