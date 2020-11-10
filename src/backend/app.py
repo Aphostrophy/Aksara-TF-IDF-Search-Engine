@@ -42,14 +42,14 @@ def hello_world():
     return data
 
 
-# @app.route("/api/upload", methods=['GET', 'POST'])
-# def upload_files():
-#     if request.method == "POST":
-#         if request.files:
-#             files_html = request.files[files.name]
-#             print(files_html)
-#             return redirect(request.url)
-#     return render_template("static/upload.html")
+@app.route("/api/upload", methods=['GET', 'POST'])
+def upload_files():
+    if request.method == "POST":
+        if request.files:
+            files_html = request.files['file']
+            files_html.save("./static/"+files_html.filename)
+            return "DONE"
+    return "DONE"
 
 
 if __name__ == '__main__':
