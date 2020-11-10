@@ -1,6 +1,8 @@
 .navbar-aksara{
     display: flex;
+    flex-direction:row;
     align-items: center;
+    justify-content: flex-end;
     box-shadow: 0px 5px 9px rgb(0,0,0,0.1);
     position: fixed;
     padding: 15px;
@@ -196,6 +198,7 @@ body{
     height: 40px;
     border-radius: 50px;
     border: 1px solid black;
+    outline: none;
 }
 
 .form{
