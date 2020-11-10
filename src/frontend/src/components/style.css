@@ -43,7 +43,7 @@
 }
 
 .Logogif{
-    background-image: url(./logogif.gif);
+    background-image: url('../public/logogif.gif');
     --scale: 0.4;
     min-width: calc(1134px*var(--scale));
     min-height: calc(638px*var(--scale));
@@ -56,7 +56,7 @@
     padding-left: 20px;
 }
 .logofit{
-    background-image: url('./logofit.png');
+    background-image: url('../public/logofit.png');
     background-size: contain;
     background-repeat: no-repeat;
     width:103.5px;
@@ -73,7 +73,7 @@ body{
 
 /*page1 START*/
 .headupload{
-    background-image: url('./headupload.png') ;
+    background-image: url('../public/headupload.png') ;
     background-size: contain;
     background-repeat: no-repeat;
     --scale: 0.6;
@@ -99,7 +99,7 @@ body{
 }
 
 .imgupload{
-    background-image: url('./upload.png') ;
+    background-image: url('../public/upload.png') ;
     background-size: contain;
     background-repeat: no-repeat;
     --scale: 0.6;
@@ -165,7 +165,7 @@ body{
 }
 
 .logopage2{
-    background-image: url(./logogif.gif);
+    background-image: url('../public/logogif.gif');
     --scale: 0.4;
     min-width: calc(1134px*var(--scale));
     min-height: calc(638px*var(--scale));
@@ -184,13 +184,12 @@ body{
 .imgsearch{
     padding-left: 10px;
     padding-bottom: 10px;
-    background-image: url(./search.png);
+    background-image: url(../public/search.png);
     --scale: 0.5;
     width: calc(80px*var(--scale));
     height: calc(80px*var(--scale));
     background-size: contain;
     background-repeat: no-repeat;
-
 }
 .searchbox{
     background-color: rgba(0, 0, 0, 0);

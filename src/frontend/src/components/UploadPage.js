@@ -19,7 +19,7 @@ function UploadPage(){
                 </div>
                 <div className="buttoncont">
                     <div className="contuploadbutton"><Link to="/upload" className="uploadbutton">Upload</Link></div>
-                    <div className="contsearchbutton"><Link to="/search" className="searchbutton">Search</Link></div>
+                    <div className="contsearchbutton"><Link to="/search" className="searchbutton">Enter Query</Link></div>
                 </div>
             </div>
             <div className="Logogif"></div>
