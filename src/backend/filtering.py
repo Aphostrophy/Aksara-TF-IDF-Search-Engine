@@ -6,7 +6,6 @@ from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
 import re
 import string
-from CountWords import Countwords
 
 porter = PorterStemmer()
 
@@ -41,6 +40,20 @@ def Cleaningkata(file):
     return clean_document
 
 
+def Cleaningquery(query):
+    x = stemkata(query)
+    clean_document = []
+    for document in x:
+        document = re.sub(r'[^\x00-\x7F]+', ' ', document)
+        document = re.sub(r'@\w+', '', document)
+        document = document.lower()
+        document = re.sub(r'[%s]' % re.escape(
+            string.punctuation), ' ', document)
+        document = re.sub(r'\s{2,}', ' ', document)
+        clean_document.append(document)
+    return clean_document
+
+
 def convert(str):
     new = ""
     for x in str:
@@ -48,7 +61,14 @@ def convert(str):
     return new
 
 
-docs = convert(Cleaningkata(file))
-docs = docs.split()
+def Countwords(list):
+    cnt = {}
+    for i in list:
+        cnt[i] = cnt.get(i, 0)+1
+    return cnt
 
-print(Countwords(docs))
+
+# docs = convert(Cleaningkata(file))
+# docs = docs.split()
+
+# print(Countwords(docs))

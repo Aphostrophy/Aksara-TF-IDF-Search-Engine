@@ -4,10 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-nltk = "*"
-flask = "*"
-beautifulsoup4 = "*"
-flask-cors = "*"
 
 [dev-packages]
 
