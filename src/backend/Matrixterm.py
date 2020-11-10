@@ -7,7 +7,7 @@ def generateTermsFromFiles(basedir):
     uniqueTerms = dict() #Declare Empty Dict untuk nyimpen semua unique terms
     fullMatrix = [] #array of dict
     for filenames in os.listdir(basedir):
-        if filenames.endswith(".html"):
+        if filenames.endswith(".txt"):
             joinpath = os.path.join(basedir, filenames)
             file = open(joinpath).read()
             docs = convert(Cleaningkata(file))
@@ -49,8 +49,8 @@ def updateTerms(fullMatrix,queryVector):
         docsDict = {x:0 for x in queryVector}
         docsDict.update(tempDocsDict)
         newFullMatrix.append(docsDict)
-        # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        # print(len(docsDict))
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        print(docsDict)
     return newFullMatrix
 
 # for docs in multFiles:

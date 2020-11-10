@@ -1,4 +1,7 @@
 def sim(Q,D):
+    print("Panjang Q: ",vectorLength(Q))
+    print("Panjang D: ",vectorLength(D))
+    print("Dot product: ",dotProduct(Q,D))
     return dotProduct(Q,D)/(vectorLength(Q)*vectorLength(D))
 
 def vectorLength(Z):
