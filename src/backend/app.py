@@ -42,13 +42,14 @@ def hello_world():
     return data
 
 
-@app.route("/api/upload", methods=['GET', 'POST'])
+@app.route("/api/uploader", methods=['GET', 'POST'])
 def upload_files():
     if request.method == "POST":
-        if request.files:
-            files_html = request.files['file']
-            files_html.save("./static/"+files_html.filename)
-            return "DONE"
+        files_html = request.files['file']
+        print(files_html)
+        files_html.save("./static/"+files_html.filename)
+        return "DONE"
+
     return "DONE"
 
 

@@ -38,7 +38,7 @@
 }
 
 .Logogif {
-	background-image: url('../public/logogif.gif');
+	background-image: url("../public/logogif.gif");
 	--scale: 0.4;
 	min-width: calc(1134px * var(--scale));
 	min-height: calc(638px * var(--scale));
@@ -94,6 +94,7 @@ body {
 }
 
 .imgupload {
+	position: fixed;
 	background-image: url("../public/upload.png");
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -158,7 +159,7 @@ body {
 }
 
 .logopage2 {
-	background-image: url('../public/headupload.png');
+	background-image: url("../public/headupload.png");
 	--scale: 0.4;
 	min-width: calc(1134px * var(--scale));
 	min-height: calc(638px * var(--scale));

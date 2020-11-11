@@ -1,49 +1,104 @@
-import React from "react";
-import Dropzone from "react-dropzone-uploader";
-import "react-dropzone-uploader/dist/styles.css";
+import React, { useMemo, useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import axios from "axios";
 import "./uploader.css";
 
-const Uploader = () => {
-	const getUploadParams = ({ meta }) => {
-		return { url: "http://localhost:5000/api/upload" };
-	};
-
-	const handleChangeStatus = ({ meta, file }, status) => {
-		console.log("CHANGEEEEEEEEEEEEEEEEEEEEEEEE");
-		console.log(status, meta, file);
-	};
-
-	const handleSubmit = (files, allFiles) => {
-		console.log("SUBMITTTTTTTTTTTTTTTTTT");
-		console.log(files);
-		console.log(files.map((f) => f.meta));
-		allFiles.forEach((f) => f.remove());
-	};
-
-	return (
-		<Dropzone
-			getUploadParams={getUploadParams}
-			onChangeStatus={handleChangeStatus}
-			onSubmit={handleSubmit}
-			styles={{
-				dropzone: { minHeight: 300, maxHeight: 250 },
-				submitButton: {
-					width: 100,
-					backgroundColor: "#e6e2cb",
-					color: "black",
-				},
-				inputLabel: {
-					color: "black",
-				},
-				inputLabelWithFiles: {
-					backgroundColor: "#e6e2cb",
-					color: "black",
-				},
-			}}
-			accept=".html"
-			inputContent="Drag Files or Click to Upload"
-		/>
-	);
+const baseStyle = {
+	flex: 1,
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	padding: "20px",
+	borderWidth: 2,
+	borderRadius: 2,
+	borderColor: "#eeeeee",
+	borderStyle: "dashed",
+	backgroundColor: "#fafafa",
+	color: "#bdbdbd",
+	outline: "none",
+	transition: "border .24s ease-in-out",
+	height: "220px",
 };
+
+const activeStyle = {
+	borderColor: "#2196f3",
+};
+
+const acceptStyle = {
+	borderColor: "#00e676",
+};
+
+const rejectStyle = {
+	borderColor: "#ff1744",
+};
+
+function Uploader(props) {
+	const [files, setFiles] = useState([]);
+	const onDrop = (files) => {
+		const uploaders = files.map((file) => {
+			const formData = new FormData();
+			formData.append("file", file);
+			formData.append("tags", `codeinfuse, medium, gist`);
+			formData.append("upload_preset", "pvhilzh7");
+			formData.append("api_key", "1234567");
+			formData.append("timestamp", (Date.now() / 1000) | 0);
+			console.log(formData);
+			console.log("Heyyyyyyy");
+			return axios
+				.post("http://localhost:5000/api/upload", formData, {
+					headers: { "X-Requested-With": "XMLHttpRequest" },
+				})
+				.then((response) => {
+					const data = response.data;
+					const fileURL = data.secure_url;
+					console.log(data);
+				});
+		});
+		axios.all(uploaders).then(() => {
+			console.log("success CUYYYYYYYYYYYYYYY");
+		});
+	};
+	const {
+		getRootProps,
+		getInputProps,
+		open,
+		isDragActive,
+		isDragAccept,
+		isDragReject,
+	} = useDropzone({
+		accept: "image/*",
+		noClick: true,
+		noKeyboard: true,
+		onDrop,
+	});
+
+	const style = useMemo(
+		() => ({
+			...baseStyle,
+			...(isDragActive ? activeStyle : {}),
+			...(isDragAccept ? acceptStyle : {}),
+			...(isDragReject ? rejectStyle : {}),
+		}),
+		[isDragActive, isDragReject, isDragAccept]
+	);
+
+	useEffect(
+		() => () => {
+			files.forEach((file) => URL.revokeObjectURL(file.preview));
+		},
+		[files]
+	);
+	return (
+		<div className="container">
+			<div {...getRootProps({ style })}>
+				<input {...getInputProps()} />
+				<p>Drag 'n' drop some files here, or click to select files</p>
+				<button type="button" onClick={open}>
+					Click here
+				</button>
+			</div>
+		</div>
+	);
+}
 
 export default Uploader;
