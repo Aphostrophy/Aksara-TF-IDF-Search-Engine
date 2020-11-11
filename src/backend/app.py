@@ -49,6 +49,7 @@ def upload_files():
         print(files_html)
         files_html.save("./static/"+files_html.filename)
         return "DONE"
+
     return "DONE"
 
 
