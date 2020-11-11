@@ -22,7 +22,7 @@ def stemkata(kata):
     return "".join(stem_kata)
 
 
-file = open("./static/threePrincess.html").read()
+file = open("./static/jesson.html").read()
 
 
 def Cleaningkata(file):
@@ -68,7 +68,7 @@ def Countwords(list):
     return cnt
 
 
-# docs = convert(Cleaningkata(file))
-# docs = docs.split()
+docs = convert(Cleaningkata(file))
+docs = docs.split()
 
-# print(Countwords(docs))
+print(docs)
