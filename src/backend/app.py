@@ -1,5 +1,7 @@
-from flask import Flask, request
-from flask_cors import CORS
+from flask import Flask, flash, request, redirect, url_for, session
+from flask.wrappers import Response
+from werkzeug.utils import secure_filename
+from flask_cors import CORS, cross_origin
 from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms
 from vectorizer import sim
 import os
@@ -7,7 +9,12 @@ import json
 
 from flask.templating import render_template
 
+UPLOAD_DIRECTORY = "/static"
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'html'])
+
 app = Flask(__name__)
+app.config['UPLOAD_DIRECTORY'] = UPLOAD_DIRECTORY
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -42,14 +49,19 @@ def hello_world():
     return data
 
 
-@app.route("/api/uploader", methods=['GET', 'POST'])
+@app.route("/api/upload", methods=['POST'])
 def upload_files():
-    if request.method == "POST":
-        files_html = request.files['file']
-        print(files_html)
-        files_html.save("./static/"+files_html.filename)
-        return "DONE"
-    return "DONE"
+    target = os.path.join(basedir + UPLOAD_DIRECTORY)
+    if not os.path.isdir(target):
+        os.mkdir(target)
+    print("WOIIIIIIIIIIII")
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    destination = "/".join([target, filename])
+    file.save(destination)
+    session['uploadFilePath'] = destination
+    response = "apa aja dah"
+    return response
 
 
 if __name__ == '__main__':

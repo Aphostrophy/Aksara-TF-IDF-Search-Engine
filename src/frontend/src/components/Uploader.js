@@ -38,10 +38,9 @@ function Uploader(props) {
 		const uploaders = files.map((file) => {
 			const formData = new FormData();
 			formData.append("file", file);
-			formData.append("tags", `codeinfuse, medium, gist`);
 			formData.append("upload_preset", "pvhilzh7");
 			formData.append("api_key", "1234567");
-			formData.append("timestamp", (Date.now() / 1000) | 0);
+			formData.append("timestamp", Date.now() / 1000 || 0);
 			console.log(formData);
 			console.log("Heyyyyyyy");
 			return axios
@@ -66,7 +65,7 @@ function Uploader(props) {
 		isDragAccept,
 		isDragReject,
 	} = useDropzone({
-		accept: "image/*",
+		accept: "text/html",
 		noClick: true,
 		noKeyboard: true,
 		onDrop,
@@ -89,15 +88,18 @@ function Uploader(props) {
 		[files]
 	);
 	return (
-		<div className="container">
-			<div {...getRootProps({ style })}>
-				<input {...getInputProps()} />
-				<p>Drag 'n' drop some files here, or click to select files</p>
-				<button type="button" onClick={open}>
-					Click here
-				</button>
+		<>
+			<div className="container">
+				<div {...getRootProps({ style })}>
+					<input {...getInputProps()} />
+					<p>Drag 'n' drop some files here, or click to select files</p>
+					<button type="button" onClick={open}>
+						Click here
+					</button>
+				</div>
 			</div>
-		</div>
+			<button type="button">Submit</button>
+		</>
 	);
 }
 
