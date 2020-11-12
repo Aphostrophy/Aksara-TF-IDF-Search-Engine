@@ -8,6 +8,7 @@ nltk = "*"
 flask = "*"
 beautifulsoup4 = "*"
 flask-cors = "*"
+werkzeug = "*"
 
 [dev-packages]
 
