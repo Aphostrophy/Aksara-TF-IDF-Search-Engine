@@ -76,14 +76,7 @@ const Uploader = () => {
 	};
 
 	const validateFile = (file) => {
-		const validTypes = [
-			"image/jpeg",
-			"image/jpg",
-			"image/png",
-			"image/gif",
-			"image/x-icon",
-			"text/html",
-		];
+		const validTypes = ["text/html"];
 		if (validTypes.indexOf(file.type) === -1) {
 			return false;
 		}
