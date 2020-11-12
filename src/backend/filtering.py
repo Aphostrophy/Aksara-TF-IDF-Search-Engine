@@ -22,9 +22,6 @@ def stemkata(kata):
     return "".join(stem_kata)
 
 
-file = open("./static/jesson.html").read()
-
-
 def Cleaningkata(file):
     cleantext = BeautifulSoup(file, "html.parser").text
     x = stemkata(cleantext)
@@ -68,7 +65,7 @@ def Countwords(list):
     return cnt
 
 
-docs = convert(Cleaningkata(file))
-docs = docs.split()
+# docs = convert(Cleaningkata(file))
+# docs = docs.split()
 
-print(docs)
+# print(docs)
