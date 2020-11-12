@@ -4,6 +4,7 @@ from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms
 from vectorizer import sim
 import os
 import json
+import ast
 
 from flask.templating import render_template
 
@@ -44,10 +45,14 @@ def hello_world():
 
 @app.route("/api/upload", methods=['GET', 'POST'])
 def upload_files():
+    print(request.data)
+    dict_str = request.data.decode("UTF-8")
+    mydata = ast.literal_eval(dict_str)
+    print(mydata)
     if request.method == "POST":
-        if request.files:
-            files_html = request.files['file']
-            files_html.save("./static/"+files_html.filename)
+        if request.data:
+            files_html = mydata
+            open(mydata['name'],'wb').write(request.data)
             return "DONE"
     return "DONE"
 
