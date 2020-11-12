@@ -6,8 +6,10 @@ def generateTermsFromFiles(basedir):
     multFiles = []
     uniqueTerms = dict() #Declare Empty Dict untuk nyimpen semua unique terms
     fullMatrix = [] #array of dict
+    fileNames = ["skip this"]
     for filenames in os.listdir(basedir):
         if filenames.endswith(".html"):
+            fileNames.append(filenames)
             joinpath = os.path.join(basedir, filenames)
             file = open(joinpath).read()
             docs = convert(Cleaningkata(file))
@@ -19,9 +21,9 @@ def generateTermsFromFiles(basedir):
             multFiles.append(docs)
         else:
             continue
-    return generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles)
+    return generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames)
 
-def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles):
+def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames):
     elem = dict()
     for keys in uniqueTerms:
         elem[keys] = 0
@@ -35,7 +37,7 @@ def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles):
                 elem[keys]=0
         fullMatrix.append(elem)
 
-    return [uniqueTerms, fullMatrix]
+    return [uniqueTerms, fullMatrix, fileNames]
 
 def generateQueryVector(query):
     docs = convert(Cleaningquery(query))

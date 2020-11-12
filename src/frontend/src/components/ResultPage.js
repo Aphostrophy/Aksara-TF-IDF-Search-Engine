@@ -9,13 +9,17 @@ export default function ResultPage(props){
     useEffect(()=>{
         ( async ()=>{
             const endpoint = `${process.env.REACT_APP_URL}/search`;
-            const {data : res} = await Axios.get(endpoint,{
-                params: {
-                    query: searchQuery
-                }
-            })
-            console.log(res);
-            setQueryResult(res);
+            try{
+                const {data : res} = await Axios.get(endpoint,{
+                    params: {
+                        query: searchQuery
+                    }
+                })
+                console.log(res);
+                setQueryResult(res);
+            } catch(err){
+                console.log(err);
+            }
         })()
     },[searchQuery])
     return(
