@@ -35,3 +35,5 @@ def webscrape(url):
     result = dict(counter)
     return result
 
+print(webscrape('https://github.com/FaridSafi/react-native-google-places-autocomplete'))
+
