@@ -84,7 +84,7 @@ body {
 	display: flex;
 	flex-flow: column;
 	width: 600px;
-	height: 300px;
+	height: 250px;
 	border: 1px solid #ababaa;
 	border-radius: 10px;
 	justify-content: center;
@@ -101,6 +101,7 @@ body {
 	--scale: 0.6;
 	width: calc(83px * var(--scale));
 	height: calc(83px * var(--scale));
+	margin-top: 145px;
 }
 .uploader {
 	color: #ababaa;
