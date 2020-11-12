@@ -20,22 +20,22 @@ CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-# @app.route('/api/search', methods=['GET'])
-# # FullMatrix[0] = uniqueTerms
-# def dir():
-#     query = request.args.get('query', default="", type=str)
-#     [uniqueTerms, fullMatrix] = generateTermsFromFiles(basedir)
-#     queryVector = generateQueryVector(query)
-#     print(queryVector)
-#     termsContainer = {
-#         x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
-#     queryVector.update(termsContainer)
-#     fullMatrix = updateTerms(fullMatrix, queryVector)
-#     for i in range(1, len(fullMatrix)):
-#         print(sim(queryVector, fullMatrix[i]))
-#     # print('BBBBBBBBBBBBBBBBBBBBBBB')
-#     # print(len(queryVector))
-#     return json.dumps(fullMatrix[0])
+@app.route('/api/search', methods=['GET'])
+# FullMatrix[0] = uniqueTerms
+def dir():
+    query = request.args.get('query', default="", type=str)
+    [uniqueTerms, fullMatrix] = generateTermsFromFiles(basedir)
+    queryVector = generateQueryVector(query)
+    print(queryVector)
+    termsContainer = {
+        x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
+    queryVector.update(termsContainer)
+    fullMatrix = updateTerms(fullMatrix, queryVector)
+    for i in range(1, len(fullMatrix)):
+        print(sim(queryVector, fullMatrix[i]))
+    # print('BBBBBBBBBBBBBBBBBBBBBBB')
+    # print(len(queryVector))
+    return json.dumps(fullMatrix[0])
 
 
 @app.route('/api/basedir', methods=['GET'])
@@ -52,18 +52,6 @@ def hello_world():
 
 @app.route("/api/upload", methods=['POST'])
 def upload_files():
-<<<<<<< HEAD
-    print(request.data)
-    dict_str = request.data.decode("UTF-8")
-    mydata = ast.literal_eval(dict_str)
-    print(mydata)
-    if request.method == "POST":
-        if request.data:
-            files_html = mydata
-            open(mydata['name'],'wb').write(request.data)
-            return "DONE"
-    return "DONE"
-=======
     target = os.path.join(basedir + UPLOAD_DIRECTORY)
     if not os.path.isdir(target):
         os.mkdir(target)
@@ -75,7 +63,6 @@ def upload_files():
     session['uploadFilePath'] = destination
     response = "apa aja dah"
     return response
->>>>>>> 10966bb5d148b1a42459c6da1b5e0f36843e26aa
 
 
 if __name__ == '__main__':
