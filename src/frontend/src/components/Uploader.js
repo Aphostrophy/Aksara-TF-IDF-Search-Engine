@@ -192,7 +192,7 @@ const Uploader = () => {
 					onClick={fileInputClicked}>
 					<div className="drop-message">
 						<div className="upload-icon"></div>
-						Drag n Drop files here or click to select file(s)
+						Drag and drop files here or click to select file(s)
 					</div>
 					<input
 						ref={fileInputRef}

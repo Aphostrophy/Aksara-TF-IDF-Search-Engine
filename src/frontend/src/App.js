@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import SearchPage from "./components/SearchPage";
 import UploadPage from "./components/UploadPage";
 import ResultPage from "./components/ResultPage";
+import About from "./components/About";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -14,9 +15,11 @@ function App() {
 			<Router>
 				<Header />
 				<Switch>
+					<Route exact path="/" component={UploadPage} />
 					<Route exact path="/upload" component={UploadPage} />
 					<Route exact path="/search" component={SearchPage} />
 					<Route exact path="/result" component={ResultPage} />
+					<Route exact path="/about" component={About} />
 				</Switch>
 			</Router>
 		</div>

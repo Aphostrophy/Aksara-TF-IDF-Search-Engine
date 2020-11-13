@@ -1,13 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './style.css'
 import { Link, Redirect, useHistory } from "react-router-dom";
 
-function SearchPage(){
+function SearchPage() {
 
     const [searchQuery, setSearchQuery] = useState("")
     const history = useHistory();
 
-    const handleChange= (e) => {
+    const handleChange = (e) => {
         e.preventDefault();
         setSearchQuery(e.target.value);
     }
@@ -16,18 +16,18 @@ function SearchPage(){
         e.preventDefault();
         history.push({
             pathname: 'result',
-            state: { searchQuery: searchQuery }      
+            state: { searchQuery: searchQuery }
         })
     }
 
-    return(
+    return (
         <div className="page2">
             <div className="logopage2"></div>
             <div className="searchcont">
-                <div className="form">
-                    <form onSubmit={(e)=>handleSubmit(e)}>
+                <div>
+                    <form className="formPageSearch" onSubmit={(e) => handleSubmit(e)}>
                         <label>
-                            <input className="searchbox" value={searchQuery} onChange={(e)=>handleChange(e)}/>
+                            <input className="searchbox" placeholder="search anything..." value={searchQuery} onChange={(e) => handleChange(e)} />
                         </label>
                         <input className="imgsearch" type="submit" value="Submit"></input>
                     </form>
