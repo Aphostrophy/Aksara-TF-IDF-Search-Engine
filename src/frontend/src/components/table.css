@@ -1,0 +1,23 @@
+#items {
+	border-collapse: collapse;
+	width: 60%;
+}
+
+#items td,
+#items th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#items tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+#items tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}
+#items th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #f2f2f2;
+}
