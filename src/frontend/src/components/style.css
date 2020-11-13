@@ -38,7 +38,7 @@
 }
 
 .Logogif {
-	background-image: url('../public/logogif.gif');
+	background-image: url("../public/logogif.gif");
 	--scale: 0.4;
 	min-width: calc(1134px * var(--scale));
 	min-height: calc(638px * var(--scale));
@@ -84,7 +84,7 @@ body {
 	display: flex;
 	flex-flow: column;
 	width: 600px;
-	height: 300px;
+	height: 250px;
 	border: 1px solid #ababaa;
 	border-radius: 10px;
 	justify-content: center;
@@ -94,12 +94,14 @@ body {
 }
 
 .imgupload {
+	position: fixed;
 	background-image: url("../public/upload.png");
 	background-size: contain;
 	background-repeat: no-repeat;
 	--scale: 0.6;
 	width: calc(83px * var(--scale));
 	height: calc(83px * var(--scale));
+	margin-top: 145px;
 }
 .uploader {
 	color: #ababaa;
@@ -158,7 +160,7 @@ body {
 }
 
 .logopage2 {
-	background-image: url('../public/headupload.png');
+	background-image: url("../public/headupload.png");
 	--scale: 0.4;
 	min-width: calc(1134px * var(--scale));
 	min-height: calc(638px * var(--scale));
