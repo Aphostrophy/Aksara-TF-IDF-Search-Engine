@@ -19,7 +19,7 @@ def webscrape(url):
     'pre'
     ]
 
-    text_elements = [t for t in page_soup.findAll(text=True) if (t.parent.name in whitelist and t != '\n' and t!= ',' and t!='.' and t!='')]
+    text_elements = [t for t in page_soup.findAll(text=True) if (t.parent.name in whitelist)]
     string = listToString(text_elements)
     text_tokens = word_tokenize(string)
     string_no_sw = [word.lower() for word in text_tokens if ((not word in stopwords.words('english')) and  word.isalpha())]
