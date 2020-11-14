@@ -22,6 +22,7 @@ export default function ResultPage(props) {
 
 
 	useEffect(() => {
+		console.log(ranks);
 		(async () => {
 			try {
 				const endpoint = theme==='normal' ? `${process.env.REACT_APP_URL}/search` : `${process.env.REACT_APP_URL}/webscrap`
@@ -65,7 +66,7 @@ export default function ResultPage(props) {
 	return (
 
 		<div className="pageResult">
-			{ranks!==[] ?
+			{ranks.length!==0 ?
 				<>
 						<div className="container-ranks">
 						<div className="cont-imgResult"><div className="imgResult"></div></div>
