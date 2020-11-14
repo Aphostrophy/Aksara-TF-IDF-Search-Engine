@@ -29,7 +29,18 @@ def dir():
     query = request.args.get('query', default="", type=str)
     [uniqueTerms, fullMatrix,fileNames] = generateTermsFromFiles(basedir)
     queryVector = generateQueryVector(query)
-    minQueryVector = queryVector.copy() # Shallow copy dari query vector
+    minQueryVector = queryVector.copy()  # Shallow copy dari query vector
+    
+    print(queryVector)
+    print(len(queryVector))
+    if (len(queryVector) == 0):
+        response = dict()
+        rank= dict()
+        rank['title'] = "stopwords"
+        response['ranks'] = []
+        response['ranks'].append(rank)
+        print(response)
+        return response
 
     termsContainer = {x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
     queryVector.update(termsContainer)
@@ -67,6 +78,10 @@ def webdir():
     print(query)
     [uniqueTerms, fullMatrix,webs] = generateTermsFromWebscrap()
     queryVector = generateQueryVector(query)
+    if (len(queryVector) == 0):
+        response = dict()
+        response['ranks']=[{"title": "no results, maybe all your search query are stopwords"}]
+        return response
     minQueryVector = queryVector.copy() # Shallow copy dari query vector
 
     termsContainer = {x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
