@@ -34,27 +34,29 @@ export default function ResultPage(props) {
 
 				setListRanks(res.ranks);
 				console.log('AAAAAAAAAAAAAAAAAA');
-				console.log(res);
-				let items = new Array(Object.keys(res.table[0]).length);
-				for (let i = 0; i < items.length; i++) {
-					items[i] = new Array(res.table.length);
-				}
-				console.log(items);
-				for (let i = 0; i < res.ranks.length; i++) {
-					newrow[i] = res.ranks[i].title;
-				}
-				for (let i = 0; i < res.table.length; i++) {
-					let keyss = Object.keys(res.table[i]);
-					for (let j = 0; j < keyss.length; j++) {
-						items[j][i] = res.table[i][keyss[j]];
+				console.log(res.ranks);
+				if (res.table) {
+					let items = new Array(Object.keys(res.table[0]).length);
+					for (let i = 0; i < items.length; i++) {
+						items[i] = new Array(res.table.length);
 					}
+					console.log(items);
+					for (let i = 0; i < res.ranks.length; i++) {
+						newrow[i] = res.ranks[i].title;
+					}
+					for (let i = 0; i < res.table.length; i++) {
+						let keyss = Object.keys(res.table[i]);
+						for (let j = 0; j < keyss.length; j++) {
+							items[j][i] = res.table[i][keyss[j]];
+						}
+					}
+					for (let i = 0; i < Object.keys(res.table[0]).length; i++) {
+						items[i][0] = Object.keys(res.table[0])[i];
+					}
+					console.log(items);
+					setRowLength(newrow.length);
+					setTable(items);
 				}
-				for (let i = 0; i < Object.keys(res.table[0]).length; i++) {
-					items[i][0] = Object.keys(res.table[0])[i];
-				}
-				console.log(items);
-				setRowLength(newrow.length);
-				setTable(items);
                 setRanks(res.ranks);
 
 			} catch (err) {
@@ -63,31 +65,36 @@ export default function ResultPage(props) {
 		})();
 	}, [searchQuery]);
 
+	if (tab) {
+		
+	}
 	return (
-
 		<div className="pageResult">
+			{console.log('AAABBBBBBBAAAAAAAAAAAAAAAAAAA', ranks)}
 			{ranks.length!==0 ?
 				<>
 						<div className="container-ranks">
 						<div className="cont-imgResult"><div className="imgResult"></div></div>
-						{listRanks.map((entry,i) =>(
-							<div className="container-rank">
-								<div className="urutan"><b> {i+1}</b></div>
-								<div onClick={() => {
-									if (props.location.state.mode === 'normal') {
-										history.push({
-											pathname: "cerita",
-											state: { fileParams: entry.title}
-										})
-									} else if (props.location.state.mode === 'web') {
-										window.open(entry.title, "_blank")
-									}
-								}}><b>Judul</b> : <div className="title-hyperlink">{entry.title.substring(0,60)}</div></div>
-								<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
-								<div><b>Similarity</b> : {entry.similarity}</div><br />
-								<div>{parse(entry.header)}</div>
-							</div>
-						))}
+						{ tab.length!==0 ?
+							listRanks.map((entry, i) => (
+								<div className="container-rank">
+									<div className="urutan"><b> {i + 1}</b></div>
+									<div onClick={() => {
+										if (props.location.state.mode === 'normal') {
+											history.push({
+												pathname: "cerita",
+												state: { fileParams: entry.title }
+											})
+										} else if (props.location.state.mode === 'web') {
+											window.open(entry.title, "_blank")
+										}
+									}}><b>Judul</b> : <div className="title-hyperlink">{entry.title.substring(0, 60)}</div></div>
+									<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
+									<div><b>Similarity</b> : {entry.similarity}</div><br />
+									<div>{parse(entry.header)}</div>
+								</div>
+							)) : <h1>Results not found, maybe your queries are all stopwords</h1>
+						}
 					</div>
 					<div className="container-result">
 						<Datatable data={tab} lengthrow={rowlength} />
