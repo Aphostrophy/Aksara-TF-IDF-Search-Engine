@@ -65,7 +65,7 @@ export default function ResultPage(props) {
 	return (
 
 		<div className="pageResult">
-			{ranks ?
+			{ranks!==[] ?
 				<>
 						<div className="container-ranks">
 						<div className="cont-imgResult"><div className="imgResult"></div></div>
