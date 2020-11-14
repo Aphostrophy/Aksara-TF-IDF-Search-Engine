@@ -34,3 +34,27 @@ def webscrape(url):
         
     result = dict(counter)
     return result
+
+def getFirstSentence(url):
+    my_url=url
+    uClient = uReq(my_url)
+    page_soup = soup(uClient.read(), "html.parser")
+    uClient.close()
+
+    whitelist = [
+    'p',
+    'pre'
+    ]
+
+    text_elements = [t for t in page_soup.findAll(text=True) if (t.parent.name in whitelist)]
+    string = listToString(text_elements)
+
+    s=""
+    i=0
+    while string[i] != '.':
+        s+=str(string[i])
+        i=i+1
+    s+='.'   
+    return s
+
+
