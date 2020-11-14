@@ -7,7 +7,7 @@ function SearchPage() {
 
     const [searchQuery, setSearchQuery] = useState("");
     const history = useHistory();
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -18,7 +18,7 @@ function SearchPage() {
         e.preventDefault();
         history.push({
             pathname: 'result',
-            state: { searchQuery: searchQuery }
+            state: { searchQuery: searchQuery , mode: theme}
         })
     }
 

@@ -29,7 +29,7 @@ export default function ResultPage(props) {
 					params: {
 						query: searchQuery,
 					},
-                });
+				});
 
 				setListRanks(res.ranks);
 				console.log('AAAAAAAAAAAAAAAAAA');
@@ -71,13 +71,16 @@ export default function ResultPage(props) {
 				{listRanks.map((entry,i) =>(
 					<div className="container-rank">
 						<div className="urutan"><b> {i+1}</b></div>
-						<div onClick={(e) => {
-							e.preventDefault();
-							history.push({
-								pathname: "cerita",
-								state: { fileParams: entry.title}
-							})
-						}}><b>Judul</b> : {entry.title}</div>
+						<div onClick={() => {
+							if (props.location.state.mode === 'normal') {
+								history.push({
+									pathname: "cerita",
+									state: { fileParams: entry.title}
+								})
+							} else if (props.location.state.mode === 'web') {
+								window.open(entry.title, "_blank")
+							}
+						}}><b>Judul</b> : <div className="title-hyperlink">{entry.title.substring(0,60)}</div></div>
 						<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
 						<div><b>Similarity</b> : {entry.similarity}</div><br />
 						<div>{parse(entry.header)}</div>
