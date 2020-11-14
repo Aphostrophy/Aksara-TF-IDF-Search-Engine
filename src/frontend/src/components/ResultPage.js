@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "./result.css";
 import Datatable from "./TableData";
+
 export default function ResultPage(props) {
 	const [searchQuery, setSearchQuery] = useState(
 		props.location.state.searchQuery
 	);
 	const [queryResult, setQueryResult] = useState(null);
 	const [data, setData] = useState([]);
-	const [tab, setTable] = useState([]);
-	const [ranks, setRanks] = useState([]);
+    const [tab, setTable] = useState([]);
+    const [ranks, setRanks] = useState([]);
 	const [rowlength, setRowLength] = useState(0);
 	const newrow = [];
+	const [listRanks,setListRanks]=useState([]);
+
+
 	useEffect(() => {
 		(async () => {
 			const endpoint = `${process.env.REACT_APP_URL}/search`;
@@ -20,7 +24,10 @@ export default function ResultPage(props) {
 					params: {
 						query: searchQuery,
 					},
-				});
+                });
+
+				setListRanks(res.ranks);
+
 				console.log(res);
 				let items = new Array(Object.keys(res.table[0]).length);
 				for (var i = 0; i < items.length; i++) {
@@ -44,7 +51,8 @@ export default function ResultPage(props) {
 				console.log(items);
 				setRowLength(newrow.length);
 				setTable(items);
-				setRanks(res.ranks);
+                setRanks(res.ranks);
+
 			} catch (err) {
 				console.log(err);
 			}
@@ -52,10 +60,24 @@ export default function ResultPage(props) {
 	}, [searchQuery]);
 
 	return (
-		<>
+
+		<div className="pageResult">
+			
+			<div className="container-ranks">
+				<div className="cont-imgResult"><div className="imgResult"></div></div>
+				{listRanks.map((entry,i) =>(
+					<div className="container-rank">
+						<div className="urutan"><b> {i+1}</b></div>
+						<div><b>Judul</b> : {entry.title}</div>
+						<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
+						<div><b>Similarity</b> : {entry.similarity}</div><br />
+						<div>{entry.header}</div>
+					</div>
+				))}
+			</div>
 			<div className="container-result">
 				<Datatable data={tab} lengthrow={rowlength} />
 			</div>
-		</>
+		</div>
 	);
 }

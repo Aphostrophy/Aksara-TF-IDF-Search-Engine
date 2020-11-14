@@ -4,9 +4,12 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms
 from vectorizer import sim
+
+import html
 import os
 import json
 import ast
+import operator
 
 from flask.templating import render_template
 
@@ -21,6 +24,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/api/search', methods=['GET'])
 # FullMatrix[0] = uniqueTerms
+
 def dir():
     query = request.args.get('query', default="", type=str)
     [uniqueTerms, fullMatrix,fileNames] = generateTermsFromFiles(basedir)
@@ -53,6 +57,8 @@ def dir():
         for keys in minQueryVector:
             Di_terms[keys] = fullMatrix[i][keys]
         response['table'].append(Di_terms)
+
+    response['ranks'].sort(key=operator.itemgetter('similarity'),reverse=True)
     return json.dumps(response)
 
 
