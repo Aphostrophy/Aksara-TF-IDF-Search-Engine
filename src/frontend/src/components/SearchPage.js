@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react'
 import './style.scss'
 import { Link, Redirect, useHistory } from "react-router-dom";
+import { ThemeContext } from '../context/ThemeContext';
 
 function SearchPage() {
 
     const [searchQuery, setSearchQuery] = useState("");
     const history = useHistory();
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -27,7 +29,7 @@ function SearchPage() {
                 <div>
                     <form className="formPageSearch" onSubmit={(e) => handleSubmit(e)}>
                         <label>
-                            <input className="searchbox" placeholder="search anything..." value={searchQuery} onChange={(e) => handleChange(e)} />
+                            {theme === 'normal' ? <input className="searchbox" placeholder="search anything... from files" value={searchQuery} onChange={(e) => handleChange(e)} /> : <input className="searchbox" placeholder="search anything... from the web" value={searchQuery} onChange={(e) => handleChange(e)} />}
                         </label>
                         <input className="imgsearch" type="submit" value="Submit"></input>
                     </form>
