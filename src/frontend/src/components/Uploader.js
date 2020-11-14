@@ -140,7 +140,7 @@ const Uploader = () => {
 			formData.append("timestamp", Date.now() / 1000 || 0);
 
 			axios
-				.post("http://localhost:5000/api/upload", formData, {
+				.post(`${process.env.REACT_APP_URL}/upload`, formData, {
 					onUploadProgress: (progressEvent) => {
 						const uploadPercentage = Math.floor(
 							(progressEvent.loaded / progressEvent.total) * 100

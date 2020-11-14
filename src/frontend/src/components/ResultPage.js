@@ -65,31 +65,38 @@ export default function ResultPage(props) {
 	return (
 
 		<div className="pageResult">
-			
-			<div className="container-ranks">
-				<div className="cont-imgResult"><div className="imgResult"></div></div>
-				{listRanks.map((entry,i) =>(
-					<div className="container-rank">
-						<div className="urutan"><b> {i+1}</b></div>
-						<div onClick={() => {
-							if (props.location.state.mode === 'normal') {
-								history.push({
-									pathname: "cerita",
-									state: { fileParams: entry.title}
-								})
-							} else if (props.location.state.mode === 'web') {
-								window.open(entry.title, "_blank")
-							}
-						}}><b>Judul</b> : <div className="title-hyperlink">{entry.title.substring(0,60)}</div></div>
-						<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
-						<div><b>Similarity</b> : {entry.similarity}</div><br />
-						<div>{parse(entry.header)}</div>
+			{ranks ?
+				<>
+						<div className="container-ranks">
+						<div className="cont-imgResult"><div className="imgResult"></div></div>
+						{listRanks.map((entry,i) =>(
+							<div className="container-rank">
+								<div className="urutan"><b> {i+1}</b></div>
+								<div onClick={() => {
+									if (props.location.state.mode === 'normal') {
+										history.push({
+											pathname: "cerita",
+											state: { fileParams: entry.title}
+										})
+									} else if (props.location.state.mode === 'web') {
+										window.open(entry.title, "_blank")
+									}
+								}}><b>Judul</b> : <div className="title-hyperlink">{entry.title.substring(0,60)}</div></div>
+								<div><b>Jumlah Kata</b> : {entry.wordscount}</div>
+								<div><b>Similarity</b> : {entry.similarity}</div><br />
+								<div>{parse(entry.header)}</div>
+							</div>
+						))}
 					</div>
-				))}
-			</div>
-			<div className="container-result">
-				<Datatable data={tab} lengthrow={rowlength} />
-			</div>
+					<div className="container-result">
+						<Datatable data={tab} lengthrow={rowlength} />
+					</div>
+				</>
+				: <div class="loadingio-spinner-eclipse-9rrd0ie4sw"><div class="ldio-a0aql1c9bzd">
+				<div></div>
+				</div></div>
+		}
+
 		</div>
 	);
 }
