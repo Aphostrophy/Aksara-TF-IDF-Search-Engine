@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import './style.css'
+import React, { useState, useContext } from 'react'
+import './style.scss'
 import { Link, Redirect, useHistory } from "react-router-dom";
 
 function SearchPage() {
 
-    const [searchQuery, setSearchQuery] = useState("")
+    const [searchQuery, setSearchQuery] = useState("");
     const history = useHistory();
 
     const handleChange = (e) => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 
-import "./uploader.css";
+import "./uploader.scss";
 
 const Uploader = () => {
 	const fileInputRef = useRef();

@@ -1,5 +1,5 @@
 import React from "react";
-import "./table.css";
+import "./table.scss";
 export default function Datatable({ data, lengthrow }) {
 	const columnss = ["terms", "query"];
 	for (var i = 0; i < lengthrow; i++) {

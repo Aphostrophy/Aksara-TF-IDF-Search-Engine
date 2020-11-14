@@ -2,7 +2,7 @@ from flask import Flask, flash, request, redirect, url_for, session
 from flask.wrappers import Response
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
-from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms
+from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms, generateTermsFromWebscrap
 from vectorizer import sim
 
 import html
@@ -61,6 +61,43 @@ def dir():
     response['ranks'].sort(key=operator.itemgetter('similarity'),reverse=True)
     return json.dumps(response)
 
+@app.route('/api/webscrap', methods=['GET'])
+def webdir():
+    query = request.args.get('query', default="", type=str)
+    print(query)
+    [uniqueTerms, fullMatrix,webs] = generateTermsFromWebscrap()
+    queryVector = generateQueryVector(query)
+    minQueryVector = queryVector.copy() # Shallow copy dari query vector
+
+    termsContainer = {x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
+    queryVector.update(termsContainer)
+    fullMatrix = updateTerms(fullMatrix, queryVector)
+
+    response = dict()
+    response['ranks'] = []
+    Di_terms = dict()
+    for keys in minQueryVector:
+        Di_terms[keys] = fullMatrix[0][keys]
+    response['table'] = []
+    response['table'].append(Di_terms)
+    response['table'].append(minQueryVector)
+    for i in range(1, len(fullMatrix)):
+        rank = dict()
+        rank['title'] = webs[i-1]
+        rank['similarity'] = sim(queryVector, fullMatrix[i])
+        rank['header'] = "Belum dibuat"
+        wordscount = 0
+        for keys in fullMatrix[i]:
+            wordscount+=fullMatrix[i][keys]
+        rank['wordscount'] = wordscount
+        response['ranks'].append(rank)
+        Di_terms = dict()
+        for keys in minQueryVector:
+            Di_terms[keys] = fullMatrix[i][keys]
+        response['table'].append(Di_terms)
+
+    response['ranks'].sort(key=operator.itemgetter('similarity'),reverse=True)
+    return json.dumps(response)
 
 @app.route('/api/basedir', methods=['GET'])
 def what_ismy_basedir():
@@ -68,7 +105,7 @@ def what_ismy_basedir():
 
 
 @app.route('/api/cerita/', methods=['GET'])
-def hello_world():
+def fetchCerita():
     cerita = request.args.get('cerita', default="", type=str)
     data = open(os.path.join(basedir, 'static/'+cerita)).read()
     return data

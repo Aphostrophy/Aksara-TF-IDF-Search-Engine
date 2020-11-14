@@ -1,5 +1,6 @@
 import os
 from filtering import Cleaningkata, Cleaningquery, convert, Countwords
+from webscrape import webscrape
 
 def generateTermsFromFiles(basedir):
     basedir = basedir + "/static"
@@ -39,6 +40,34 @@ def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames):
 
     return [uniqueTerms, fullMatrix, fileNames]
 
+def generateTermsFromWebscrap():
+    fullMatrix = []
+    semiFullMatrix = []
+    uniqueTerms = dict()
+    webs = ['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0', 'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']
+    for web in webs:
+        docs = webscrape(web)
+        termDocs = docs.copy()
+        termDocs = {x: 0 for x in termDocs}
+        uniqueTerms.update(termDocs)
+        semiFullMatrix.append(docs)
+    return generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs)
+    
+def generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs):
+    elem = dict()
+    for keys in uniqueTerms:
+        elem[keys] = 0
+    fullMatrix.append(elem)
+    for docs in semiFullMatrix:
+        elem = dict()
+        for keys in uniqueTerms:
+            if keys in docs:
+                elem[keys] = docs[keys]
+            else:
+                elem[keys] = 0
+        fullMatrix.append(elem)
+    return [uniqueTerms,fullMatrix, webs]
+
 def generateQueryVector(query):
     docs = convert(Cleaningquery(query))
     docs = docs.split()
@@ -51,9 +80,7 @@ def updateTerms(fullMatrix,queryVector):
         docsDict = {x:0 for x in queryVector}
         docsDict.update(tempDocsDict)
         newFullMatrix.append(docsDict)
-        # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        # print(len(docsDict))
-    return newFullMatrix
+    return newFullMatrix #terms newFullMatrix sudah lengkap bersama query
 
 # for docs in multFiles:
 #     print("File: ")
