@@ -1,6 +1,10 @@
+.table-wrapper {
+	overflow-x: scroll;
+	width: 80%;
+}
 #items {
 	border-collapse: collapse;
-	width: 60%;
+	width: 100%;
 }
 
 #items td,

@@ -1,4 +1,4 @@
-.pageResult{
+.pageResult {
 	display: flex;
 	width: 100vw;
 	height: 100vh;
@@ -7,8 +7,8 @@
 }
 
 .container-result {
-	height: 100vh;
-	width: 100vw;
+	height: 50vh;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -16,22 +16,22 @@
 	margin-bottom: 50px;
 }
 
-.urutan{
-	color : #ababaa;
+.urutan {
+	color: #ababaa;
 	text-align: end;
 }
 
-.container-rank{
+.container-rank {
 	background-color: white;
 	margin-bottom: 20px;
-	width : 40vw;
+	width: 40vw;
 	padding: 10px 20px 20px 20px;
 	border-radius: 10px;
 	border: 1px solid #ababaa;
 	font: Helvetica;
 }
 
-.imgResult{
+.imgResult {
 	margin-bottom: 20px;
 	background-image: url("../public/searchResult.png");
 	background-size: contain;
@@ -41,16 +41,15 @@
 	height: calc(64px * var(--scale));
 }
 
-.cont-imgResult{
+.cont-imgResult {
 	width: 40vw;
 	display: flex;
 	align-items: flex-start;
 	flex-flow: row;
 }
-.container-ranks{
+.container-ranks {
 	margin-top: 100px;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-
 }

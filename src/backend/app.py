@@ -1,9 +1,13 @@
+from operator import mul
+from os.path import join
 from flask import Flask, flash, request, redirect, url_for, session
 from flask.wrappers import Response
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms, generateTermsFromWebscrap
 from vectorizer import sim
+from os import listdir
+from os.path import isfile, join
 
 import html
 import os
@@ -22,29 +26,39 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 @app.route('/api/search', methods=['GET'])
 # FullMatrix[0] = uniqueTerms
-
 def dir():
     query = request.args.get('query', default="", type=str)
-    [uniqueTerms, fullMatrix,fileNames] = generateTermsFromFiles(basedir)
+    [uniqueTerms, fullMatrix, fileNames] = generateTermsFromFiles(basedir)
     queryVector = generateQueryVector(query)
     minQueryVector = queryVector.copy()  # Shallow copy dari query vector
-    
+
     print(queryVector)
     print(len(queryVector))
     if (len(queryVector) == 0):
         response = dict()
-        rank= dict()
+        rank = dict()
         rank['title'] = "stopwords"
         response['ranks'] = []
         response['ranks'].append(rank)
         print(response)
         return response
 
-    termsContainer = {x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
+    termsContainer = {
+        x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
     queryVector.update(termsContainer)
     fullMatrix = updateTerms(fullMatrix, queryVector)
+
+    # buat baca list directory
+    onlyfiles = [f for f in listdir(
+        basedir + UPLOAD_DIRECTORY) if isfile(join(basedir + UPLOAD_DIRECTORY, f))]
+    print(onlyfiles)
+    multFiles = []
+    for f in onlyfiles:
+        multFiles.append(os.path.splitext(f)[0])
+    print(multFiles)
 
     response = dict()
     response['ranks'] = []
@@ -58,33 +72,38 @@ def dir():
         rank = dict()
         rank['title'] = fileNames[i]
         rank['similarity'] = sim(queryVector, fullMatrix[i])
-        rank['header'] = open(os.path.join(basedir +"/static", fileNames[i])).readline()
+        rank['header'] = open(os.path.join(
+            basedir + "/static", fileNames[i])).readline()
         wordscount = 0
         for keys in fullMatrix[i]:
-            wordscount+=fullMatrix[i][keys]
+            wordscount += fullMatrix[i][keys]
         rank['wordscount'] = wordscount
         response['ranks'].append(rank)
         Di_terms = dict()
         for keys in minQueryVector:
             Di_terms[keys] = fullMatrix[i][keys]
         response['table'].append(Di_terms)
-
-    response['ranks'].sort(key=operator.itemgetter('similarity'),reverse=True)
+    response['kolom'] = []
+    response['kolom'].append(multFiles)
+    response['ranks'].sort(key=operator.itemgetter('similarity'), reverse=True)
     return json.dumps(response)
+
 
 @app.route('/api/webscrap', methods=['GET'])
 def webdir():
     query = request.args.get('query', default="", type=str)
     print(query)
-    [uniqueTerms, fullMatrix,webs] = generateTermsFromWebscrap()
+    [uniqueTerms, fullMatrix, webs] = generateTermsFromWebscrap()
     queryVector = generateQueryVector(query)
     if (len(queryVector) == 0):
         response = dict()
-        response['ranks']=[{"title": "no results, maybe all your search query are stopwords"}]
+        response['ranks'] = [
+            {"title": "no results, maybe all your search query are stopwords"}]
         return response
-    minQueryVector = queryVector.copy() # Shallow copy dari query vector
+    minQueryVector = queryVector.copy()  # Shallow copy dari query vector
 
-    termsContainer = {x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
+    termsContainer = {
+        x: queryVector[x] if x in queryVector else 0 for x in uniqueTerms}
     queryVector.update(termsContainer)
     fullMatrix = updateTerms(fullMatrix, queryVector)
 
@@ -103,7 +122,7 @@ def webdir():
         rank['header'] = "Belum dibuat"
         wordscount = 0
         for keys in fullMatrix[i]:
-            wordscount+=fullMatrix[i][keys]
+            wordscount += fullMatrix[i][keys]
         rank['wordscount'] = wordscount
         response['ranks'].append(rank)
         Di_terms = dict()
@@ -111,8 +130,9 @@ def webdir():
             Di_terms[keys] = fullMatrix[i][keys]
         response['table'].append(Di_terms)
 
-    response['ranks'].sort(key=operator.itemgetter('similarity'),reverse=True)
+    response['ranks'].sort(key=operator.itemgetter('similarity'), reverse=True)
     return json.dumps(response)
+
 
 @app.route('/api/basedir', methods=['GET'])
 def what_ismy_basedir():
