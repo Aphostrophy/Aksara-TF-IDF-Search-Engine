@@ -239,6 +239,7 @@ input::placeholder{
 	justify-content: center;
 	align-content: center;
 	background-color: white;
+	margin-bottom: 40px;
 
 }
 
@@ -266,6 +267,15 @@ input::placeholder{
 	height: calc(457px * var(--scale));
 }
 
+.img-jesson{
+	background-image: url("../public/jesson.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	--scale: 0.4;
+	width: calc(457px * var(--scale));
+	height: calc(457px * var(--scale));
+}
+
 .img-hera{
 	background-image: url("../public/hera.png");
 	background-size: contain;
@@ -273,6 +283,66 @@ input::placeholder{
 	--scale: 0.4;
 	width: calc(457px * var(--scale));
 	height: calc(457px * var(--scale));
+}
+
+.img-concept{
+	background-image: url("../public/concept.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	--scale: 0.7;
+	width: calc(422px * var(--scale));
+	height: calc(64px * var(--scale));
+	margin-bottom: 20px;
+	margin-left: 30px;
+	margin-top: 900px;
+}
+
+.content-concept{
+	font-size: 14px;
+	background-color: white;
+	width: 100vw;
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 30px;
+	margin-bottom: 40px;;
+}
+
+.container-htu{
+	background-color: white;
+	width: 100vw;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 40px;;
+
+}
+.content-htu{
+	font-size: 14px;
+	padding-left: 30px;
+}
+
+.container-img-concept{
+	width: 100vw;;
+	display: flex;
+	align-items: flex-start;
+	justify-items: flex-start;
+}
+
+.img-htu{
+	background-image: url("../public/howtouse.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	--scale: 0.7;
+	width: calc(508px * var(--scale));
+	height: calc(64px * var(--scale));
+	margin-bottom: 20px;
+	margin-left: 30px;
+}
+
+.container-img-htu{
+	width: 100vw;;
+	display: flex;
+	align-items: flex-start;
+	justify-items: flex-start;
 }
 
 .container-img-about{
@@ -293,7 +363,22 @@ input::placeholder{
 }
 
 .cerita-full{
-	margin-top: 75px;
+	margin-top: 220px;
+	margin-bottom: 30px;
+	width : 80vw;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #ffffff;
+	border:1px solid #ababaa;
+}
+
+.container-cerita{
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+
 }
 
 .title-hyperlink{
@@ -318,7 +403,7 @@ input::placeholder{
 	transform-origin: 80px 82px;
   }
   .loadingio-spinner-eclipse-9rrd0ie4sw {
-	margin-top: 100px;
+	margin-top: 200px;
 	width: 200px;
 	height: 200px;
 	display: inline-block;
@@ -334,5 +419,6 @@ input::placeholder{
 	transform-origin: 0 0; /* see note above */
   }
   .ldio-a0aql1c9bzd div { box-sizing: content-box; }
+
 
 /*page3 END*/
