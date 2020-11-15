@@ -88,13 +88,3 @@ def updateTerms(fullMatrix, queryVector):
         docsDict.update(tempDocsDict)
         newFullMatrix.append(docsDict)
     return newFullMatrix  # terms newFullMatrix sudah lengkap bersama query
-
-# for docs in multFiles:
-#     print("File: ")
-#     print(docs)
-
-# print(uniqueTerms)
-# print(fullMatrix)
-
-# for i in range(len(fullMatrix)):
-#     print(len(fullMatrix[0]))

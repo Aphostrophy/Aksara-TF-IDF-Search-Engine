@@ -34,6 +34,7 @@ def webscrape(url):
 def getFirstSentence(url):
     my_url=url
     uClient = uReq(my_url)
+    # return uClient.readline()
     page_soup = soup(uClient.read(), "html.parser")
     uClient.close()
 

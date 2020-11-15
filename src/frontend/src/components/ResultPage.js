@@ -21,7 +21,6 @@ export default function ResultPage(props) {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 
 	useEffect(() => {
-		console.log(ranks);
 		(async () => {
 			try {
 				const endpoint =
@@ -33,16 +32,12 @@ export default function ResultPage(props) {
 						query: searchQuery,
 					},
 				});
-				console.log(res);
 				setListRanks(res.ranks);
-				console.log("AAAAAAAAAAAAAAAAAA");
-				console.log(res.ranks);
 				if (res.table) {
 					let items = new Array(Object.keys(res.table[0]).length);
 					for (let i = 0; i < items.length; i++) {
 						items[i] = new Array(res.table.length);
 					}
-					console.log(items);
 					for (let i = 0; i < res.ranks.length; i++) {
 						newrow[i] = res.ranks[i].title;
 					}
@@ -55,7 +50,6 @@ export default function ResultPage(props) {
 					for (let i = 0; i < Object.keys(res.table[0]).length; i++) {
 						items[i][0] = Object.keys(res.table[0])[i];
 					}
-					console.log(items);
 					setRowLength(newrow.length);
 					setTable(items);
 					setKolom(res.kolom);
@@ -71,7 +65,6 @@ export default function ResultPage(props) {
 	}
 	return (
 		<div className="pageResult">
-			{console.log("AAABBBBBBBAAAAAAAAAAAAAAAAAAA", ranks)}
 			{ranks.length !== 0 ? (
 				<>
 					<div className="container-ranks">
@@ -80,7 +73,7 @@ export default function ResultPage(props) {
 						</div>
 						{tab.length !== 0 ? (
 							listRanks.map((entry, i) => (
-								<div className="container-rank">
+								<div key={i} className="container-rank">
 									<div className="urutan">
 										<b> {i + 1}</b>
 									</div>
@@ -119,8 +112,8 @@ export default function ResultPage(props) {
 					</div>
 				</>
 			) : (
-				<div class="loadingio-spinner-eclipse-9rrd0ie4sw">
-					<div class="ldio-a0aql1c9bzd">
+				<div className="loadingio-spinner-eclipse-9rrd0ie4sw">
+					<div className="ldio-a0aql1c9bzd">
 						<div></div>
 					</div>
 				</div>

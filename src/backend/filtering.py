@@ -63,9 +63,3 @@ def Countwords(list):
     for i in list:
         cnt[i] = cnt.get(i, 0)+1
     return cnt
-
-
-# docs = convert(Cleaningkata(file))
-# docs = docs.split()
-
-# print(docs)

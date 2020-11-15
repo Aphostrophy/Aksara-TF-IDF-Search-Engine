@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 from Matrixterm import generateTermsFromFiles, generateQueryVector, updateTerms, generateTermsFromWebscrap
 from vectorizer import sim
+from webscrape import getFirstSentence, wordsCount
 from os import listdir
 from os.path import isfile, join
 
@@ -35,15 +36,12 @@ def dir():
     queryVector = generateQueryVector(query)
     minQueryVector = queryVector.copy()  # Shallow copy dari query vector
 
-    print(queryVector)
-    print(len(queryVector))
     if (len(queryVector) == 0):
         response = dict()
         rank = dict()
         rank['title'] = "stopwords"
         response['ranks'] = []
         response['ranks'].append(rank)
-        print(response)
         return response
 
     termsContainer = {
@@ -54,11 +52,9 @@ def dir():
     # buat baca list directory
     onlyfiles = [f for f in listdir(
         basedir + UPLOAD_DIRECTORY) if isfile(join(basedir + UPLOAD_DIRECTORY, f))]
-    print(onlyfiles)
     multFiles = []
     for f in onlyfiles:
         multFiles.append(os.path.splitext(f)[0])
-    print(multFiles)
 
     response = dict()
     response['ranks'] = []
@@ -92,7 +88,6 @@ def dir():
 @app.route('/api/webscrap', methods=['GET'])
 def webdir():
     query = request.args.get('query', default="", type=str)
-    print(query)
     [uniqueTerms, fullMatrix, webs] = generateTermsFromWebscrap()
     queryVector = generateQueryVector(query)
     if (len(queryVector) == 0):
@@ -109,6 +104,8 @@ def webdir():
 
     response = dict()
     response['ranks'] = []
+    response['kolom'] = [['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0',
+                          'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']]
     Di_terms = dict()
     for keys in minQueryVector:
         Di_terms[keys] = fullMatrix[0][keys]
@@ -119,18 +116,14 @@ def webdir():
         rank = dict()
         rank['title'] = webs[i-1]
         rank['similarity'] = sim(queryVector, fullMatrix[i])
-        rank['header'] = "Belum dibuat"
-        wordscount = 0
-        for keys in fullMatrix[i]:
-            wordscount += fullMatrix[i][keys]
-        rank['wordscount'] = wordscount
+        rank['header'] = getFirstSentence(rank['title'])
+        rank['wordscount'] = wordsCount(rank['title'])
         response['ranks'].append(rank)
         Di_terms = dict()
         for keys in minQueryVector:
             Di_terms[keys] = fullMatrix[i][keys]
         response['table'].append(Di_terms)
-    response['kolom'] = [['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0',
-                          'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']]
+
     response['ranks'].sort(key=operator.itemgetter('similarity'), reverse=True)
     return json.dumps(response)
 
@@ -143,7 +136,6 @@ def what_ismy_basedir():
 @app.route('/api/cerita/', methods=['GET'])
 def fetchCerita():
     cerita = request.args.get('cerita', default="", type=str)
-    print(cerita)
     data = open(os.path.join(basedir, 'static/'+cerita)).read()
     return data
 
@@ -153,7 +145,6 @@ def upload_files():
     target = os.path.join(basedir + UPLOAD_DIRECTORY)
     if not os.path.isdir(target):
         os.mkdir(target)
-    print("WOIIIIIIIIIIII")
     file = request.files['file']
     filename = secure_filename(file.filename)
     destination = "/".join([target, filename])

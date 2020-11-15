@@ -11,16 +11,16 @@ export default function Datatable({ data, lengthrow, columnsss }) {
 			<table id="items" cellPadding={0} cellSpacing={0}>
 				<thead>
 					<tr>
-						{columnss.map((heading) => (
-							<th>{heading}</th>
+						{columnss.map((heading,i) => (
+							<th key={i}>{heading}</th>
 						))}
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((row) => (
-						<tr>
-							{columns.map((column) => (
-								<td>{row[column]}</td>
+					{data.map((row,i) => (
+						<tr key={i}>
+							{columns.map((column,i) => (
+								<td key={i}>{row[column]}</td>
 							))}
 						</tr>
 					))}
