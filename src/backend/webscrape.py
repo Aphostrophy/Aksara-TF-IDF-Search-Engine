@@ -4,9 +4,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import collections
 
-def listToString(s):  
-    str1 = " "   
-    return (str1.join(s)) 
         
 def webscrape(url):
     my_url=url
@@ -14,14 +11,13 @@ def webscrape(url):
     page_soup = soup(uClient.read(), "html.parser")
     uClient.close()
 
-    whitelist = [
-    'p',
-    'pre'
-    ]
+    s = page_soup.find('div', class_='GM')
 
-    text_elements = [t for t in page_soup.findAll(text=True) if (t.parent.name in whitelist)]
-    string = listToString(text_elements)
-    text_tokens = word_tokenize(string)
+    for child in s.find_all("div"):
+        child.decompose()
+
+    x =s.get_text()
+    text_tokens = word_tokenize(x)
     string_no_sw = [word.lower() for word in text_tokens if ((not word in stopwords.words('english')) and  word.isalpha())]
 
     myDict=[dict() for i in range(len(string_no_sw)) ]
@@ -41,20 +37,41 @@ def getFirstSentence(url):
     page_soup = soup(uClient.read(), "html.parser")
     uClient.close()
 
-    whitelist = [
-    'p',
-    'pre'
-    ]
+    s = page_soup.find('div', class_='GM')
 
-    text_elements = [t for t in page_soup.findAll(text=True) if (t.parent.name in whitelist)]
-    string = listToString(text_elements)
+    for child in s.find_all("div"):
+        child.decompose()
+
+    x =s.get_text()
 
     s=""
     i=0
-    while string[i] != '.':
-        s+=str(string[i])
+    while x[i] != '.':
+        s+=str(x[i])
         i=i+1
     s+='.'   
     return s
 
+
+def wordsCount(url):
+    my_url=url
+    uClient = uReq(my_url)
+    page_soup = soup(uClient.read(), "html.parser")
+    uClient.close()
+
+    s = page_soup.find('div', class_='GM')
+
+    for child in s.find_all("div"):
+        child.decompose()
+
+    x =s.get_text()
+    y = x.split()
+
+    count =0
+    for i in y:
+        count = count+1
+
+    return count
+
+    
 
