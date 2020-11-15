@@ -129,7 +129,8 @@ def webdir():
         for keys in minQueryVector:
             Di_terms[keys] = fullMatrix[i][keys]
         response['table'].append(Di_terms)
-
+    response['kolom'] = [['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0',
+                          'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']]
     response['ranks'].sort(key=operator.itemgetter('similarity'), reverse=True)
     return json.dumps(response)
 

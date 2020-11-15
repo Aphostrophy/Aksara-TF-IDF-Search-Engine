@@ -2,11 +2,12 @@ import os
 from filtering import Cleaningkata, Cleaningquery, convert, Countwords
 from webscrape import webscrape
 
+
 def generateTermsFromFiles(basedir):
     basedir = basedir + "/static"
     multFiles = []
-    uniqueTerms = dict() #Declare Empty Dict untuk nyimpen semua unique terms
-    fullMatrix = [] #array of dict
+    uniqueTerms = dict()  # Declare Empty Dict untuk nyimpen semua unique terms
+    fullMatrix = []  # array of dict
     fileNames = ["skip this"]
     for filenames in os.listdir(basedir):
         if filenames.endswith(".html"):
@@ -17,14 +18,15 @@ def generateTermsFromFiles(basedir):
             docs = docs.split()
             docs = Countwords(docs)
             termDocs = docs.copy()
-            termDocs = {x:0 for x in termDocs} #Dictionary comprehension
+            termDocs = {x: 0 for x in termDocs}  # Dictionary comprehension
             uniqueTerms.update(termDocs)
             multFiles.append(docs)
         else:
             continue
-    return generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames)
+    return generateMatrixFromTerms(fullMatrix, uniqueTerms, multFiles, fileNames)
 
-def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames):
+
+def generateMatrixFromTerms(fullMatrix, uniqueTerms, multFiles, fileNames):
     elem = dict()
     for keys in uniqueTerms:
         elem[keys] = 0
@@ -33,18 +35,20 @@ def generateMatrixFromTerms(fullMatrix,uniqueTerms,multFiles,fileNames):
         elem = dict()
         for keys in uniqueTerms:
             if keys in docs:
-                elem[keys]=docs[keys]
-            else: #keys not in docs
-                elem[keys]=0
+                elem[keys] = docs[keys]
+            else:  # keys not in docs
+                elem[keys] = 0
         fullMatrix.append(elem)
 
     return [uniqueTerms, fullMatrix, fileNames]
+
 
 def generateTermsFromWebscrap():
     fullMatrix = []
     semiFullMatrix = []
     uniqueTerms = dict()
-    webs = ['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0', 'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']
+    webs = ['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0',
+            'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']
     for web in webs:
         docs = webscrape(web)
         termDocs = docs.copy()
@@ -52,7 +56,8 @@ def generateTermsFromWebscrap():
         uniqueTerms.update(termDocs)
         semiFullMatrix.append(docs)
     return generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs)
-    
+
+
 def generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs):
     elem = dict()
     for keys in uniqueTerms:
@@ -66,21 +71,23 @@ def generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs):
             else:
                 elem[keys] = 0
         fullMatrix.append(elem)
-    return [uniqueTerms,fullMatrix, webs]
+    return [uniqueTerms, fullMatrix, webs]
+
 
 def generateQueryVector(query):
     docs = convert(Cleaningquery(query))
     docs = docs.split()
     return Countwords(docs)
 
-def updateTerms(fullMatrix,queryVector):
-    newFullMatrix= []
+
+def updateTerms(fullMatrix, queryVector):
+    newFullMatrix = []
     for docsDict in fullMatrix:
         tempDocsDict = docsDict.copy()
-        docsDict = {x:0 for x in queryVector}
+        docsDict = {x: 0 for x in queryVector}
         docsDict.update(tempDocsDict)
         newFullMatrix.append(docsDict)
-    return newFullMatrix #terms newFullMatrix sudah lengkap bersama query
+    return newFullMatrix  # terms newFullMatrix sudah lengkap bersama query
 
 # for docs in multFiles:
 #     print("File: ")
