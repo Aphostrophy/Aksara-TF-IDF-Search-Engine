@@ -122,6 +122,7 @@ def what_ismy_basedir():
 @app.route('/api/cerita/', methods=['GET'])
 def fetchCerita():
     cerita = request.args.get('cerita', default="", type=str)
+    print(cerita)
     data = open(os.path.join(basedir, 'static/'+cerita)).read()
     return data
 

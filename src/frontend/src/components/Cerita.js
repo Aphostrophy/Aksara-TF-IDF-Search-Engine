@@ -10,6 +10,7 @@ export default function Cerita(props) {
         (async () => {
             try {
                 const storyHtml = await Axios.get(`${process.env.REACT_APP_URL}/cerita`, { params: { cerita: props.location.state.fileParams } });
+                console.log(props.location.state.fileParams);
                 setFullStory(storyHtml.data);
                 console.log(storyHtml.data)
             } catch (err) {
