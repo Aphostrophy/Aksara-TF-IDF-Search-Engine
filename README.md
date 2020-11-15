@@ -46,7 +46,7 @@ Show examples of usage:
 
 ## Features
 List of features ready and TODOs for future development
-* Multiple-upload file feature with drag and drop or onclick features
+* Multiple-upload file with drag and drop or onclick features
 * Normal mode and Webscrap mode features 
 * Search query from documents features
 
