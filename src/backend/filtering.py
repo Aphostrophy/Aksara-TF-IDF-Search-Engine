@@ -11,6 +11,8 @@ porter = PorterStemmer()
 
 stopWords = set(stopwords.words('english'))
 
+# Fungsi ini digunakan untuk stemkata + memfilter stopwords
+
 
 def stemkata(kata):
     token_words = word_tokenize(kata)
@@ -20,6 +22,8 @@ def stemkata(kata):
             stem_kata.append(porter.stem(word))
             stem_kata.append(" ")
     return "".join(stem_kata)
+
+# Fungsi ini digunakan untuk membersihkan tag-tag html dan punctuation yang tidak diperlukan dari dokumen
 
 
 def Cleaningkata(file):
@@ -36,6 +40,8 @@ def Cleaningkata(file):
         clean_document.append(document)
     return clean_document
 
+# fungsi ini digunakan untuk membersihkan tag-tag html dan punctuation yang tidak diperlukan dari search query
+
 
 def Cleaningquery(query):
     x = stemkata(query)
@@ -50,12 +56,16 @@ def Cleaningquery(query):
         clean_document.append(document)
     return clean_document
 
+# fungsi ini digunakan untuk mengabungkan array char menjadi suatu string
+
 
 def convert(str):
     new = ""
     for x in str:
         new += x
     return new
+
+# fungsi ini digunakan untuk menghitung banyak kata
 
 
 def Countwords(list):
