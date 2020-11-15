@@ -29,7 +29,7 @@ function SearchPage() {
                 <div>
                     <form className="formPageSearch" onSubmit={(e) => handleSubmit(e)}>
                         <label>
-                            {theme === 'normal' ? <input className="searchbox" placeholder="search anything... from files" value={searchQuery} onChange={(e) => handleChange(e)} /> : <input className="searchbox" placeholder="search anything... from the web" value={searchQuery} onChange={(e) => handleChange(e)} />}
+                            {theme === 'normal' ? <input className="searchbox" placeholder="search anything from the files..." value={searchQuery} onChange={(e) => handleChange(e)} /> : <input className="searchbox" placeholder="search anything from the web..." value={searchQuery} onChange={(e) => handleChange(e)} />}
                         </label>
                         <input className="imgsearch" type="submit" value="Submit"></input>
                     </form>
