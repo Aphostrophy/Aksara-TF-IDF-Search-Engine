@@ -1,6 +1,6 @@
 # Algeo02-19079
 # Project Name
-> Here goes your awesome project description!
+> Aksara
 
 ## Table of contents
 * [General info](#general-info)
@@ -13,7 +13,8 @@
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+Project ini merupakan tugas besar Algeo ITB ke 2. Project ini dibuat dengan menggunakan framework React.js dan API dengan Axios serta Flask. 
+Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat menerima inputtan file dan melakukan Search query berdasarkan dokumen yang dimasukkan.
 
 ## Screenshots
 ![Halaman Utama](./src/1605465089058.jpg)
@@ -45,9 +46,9 @@ Show examples of usage:
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Multiple-upload file feature with drag and drop or onclick features
+* Normal mode and Webscrap mode features 
+* Search query from documents features
 
 ## Status
 Project is: finished.
@@ -56,4 +57,7 @@ Project is: finished.
 Add here credits. Project inspired by..., based on...
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by 
+- Marcello Faria
+- Jesson Gossal Yo
+- Hera Shafira
