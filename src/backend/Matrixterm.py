@@ -44,7 +44,7 @@ def generateTermsFromWebscrap():
     fullMatrix = []
     semiFullMatrix = []
     uniqueTerms = dict()
-    webs = ['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0', 'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/Grimm_fairy_stories/Cinderella.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']
+    webs = ['https://www.worldoftales.com/fairy_tales/Hans_Christian_Andersen/Andersen_fairy_tale_47.html#gsc.tab=0', 'https://www.worldoftales.com/fairy_tales/Brothers_Grimm/THE%20GOOSE-GIRL.html#gsc.tab=0', 'https://www.worldoftales.com/European_folktales/English_folktale_116.html#gsc.tab=0']
     for web in webs:
         docs = webscrape(web)
         termDocs = docs.copy()
