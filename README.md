@@ -16,7 +16,7 @@
 Add more general information about project. What the purpose of the project is? Motivation?
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+(./src/1605465089058.jpg)
 
 ## Technologies
 * Tech 1 - version 1.0
@@ -24,8 +24,21 @@ Add more general information about project. What the purpose of the project is? 
 * Tech 3 - version 3.0
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
-
+- open folder pada vscode
+- buka terminal pada vscode
+  lalu ketik kode berikut
+   - cd src
+   - cd frontend
+   - yarn 
+   - yarn start
+ - buka terminal untuk backend
+   - cd src
+   - cd backend 
+   - install pipenv terlebih dahulu jika belum ada
+   - pip install pipenv
+   - pipenv shell
+   - python app.py
+   
 ## Code Examples
 Show examples of usage:
 `put-your-code-here`
@@ -36,12 +49,8 @@ List of features ready and TODOs for future development
 * Awesome feature 2
 * Awesome feature 3
 
-To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
-
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+Project is: finished.
 
 ## Inspiration
 Add here credits. Project inspired by..., based on...
