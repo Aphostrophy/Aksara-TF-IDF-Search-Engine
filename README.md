@@ -58,6 +58,6 @@ Add here credits. Project inspired by..., based on...
 
 ## Contact
 Created by 
-- Marcello Faria
 - Jesson Gossal Yo
+- Marcello Faria
 - Hera Shafira
