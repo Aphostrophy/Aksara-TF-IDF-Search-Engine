@@ -16,7 +16,7 @@
 Add more general information about project. What the purpose of the project is? Motivation?
 
 ## Screenshots
-![Halaman Utama](./img/screenshot.png)(src/1605465089058.jpg)
+![Halaman Utama](./src/1605465089058.jpg)
 
 ## Technologies
 * Tech 1 - version 1.0
