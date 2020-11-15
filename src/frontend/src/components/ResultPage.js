@@ -97,7 +97,7 @@ export default function ResultPage(props) {
 										<b>Jumlah Kata</b> : {entry.wordscount}
 									</div>
 									<div>
-										<b>Similarity</b> : {entry.similarity}
+										<b>Similarity</b> : {entry.similarity*100} %
 									</div>
 									<br />
 									<div>{parse(entry.header)}</div>
