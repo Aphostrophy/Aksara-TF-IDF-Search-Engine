@@ -127,10 +127,16 @@ def webdir():
     response['ranks'].sort(key=operator.itemgetter('similarity'), reverse=True)
     return json.dumps(response)
 
+# fungsi ini digunakan untuk menampilkan path base directory
+
 
 @app.route('/api/basedir', methods=['GET'])
 def what_ismy_basedir():
     return basedir
+
+# fungsi ini digunakan untuk melakukan link terhadap  cerita yang
+# ditekan difrontend, sehingga di front-end user dapat
+# melihat dokumen dari link yang ditekan
 
 
 @app.route('/api/cerita/', methods=['GET'])
@@ -138,6 +144,9 @@ def fetchCerita():
     cerita = request.args.get('cerita', default="", type=str)
     data = open(os.path.join(basedir, 'static/'+cerita)).read()
     return data
+
+# fungsi ini digunakan untuk melakukan metode POST yaitu untuk memfilter
+# file upload dari front end dan menyimpan file yang diupload ke folder static
 
 
 @app.route("/api/upload", methods=['POST'])
