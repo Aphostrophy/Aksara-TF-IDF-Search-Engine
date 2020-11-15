@@ -76,7 +76,7 @@ const Uploader = () => {
 	};
 
 	const validateFile = (file) => {
-		const validTypes = ["text/html"];
+		const validTypes = ["text/html", "text/plain"];
 		if (validTypes.indexOf(file.type) === -1) {
 			return false;
 		}
