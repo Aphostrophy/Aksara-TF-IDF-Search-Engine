@@ -7,7 +7,6 @@
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Important] (#important)
 * [Features](#features)
 * [Status](#status)
 * [Contact](#contact)
@@ -32,14 +31,15 @@ Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat 
 - open folder yang sudah diclone pada vscode
 - buka terminal pada vscode
   lalu ketik kode berikut
-  1. Untuk setup frontend
+  
+  Untuk setup frontend
    - cd src
    - cd frontend
    - install yarn terlebih dahulu jika belum ada
    - yarn install
    - yarn start
    
- 2. Untuk setup backend
+  Untuk setup backend
    - cd src
    - cd backend 
    - install pipenv terlebih dahulu jika belum ada
