@@ -7,13 +7,14 @@
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Important](#important)
 * [Features](#features)
 * [Status](#status)
 * [Contact](#contact)
 
 ## General info
-Project ini merupakan tugas besar Algeo ITB ke 2. Project ini dibuat dengan menggunakan framework React.js dan API dengan Axios serta Flask. 
-Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat menerima inputtan file dan melakukan Search query berdasarkan dokumen yang dimasukkan.
+Project ini merupakan tugas besar Algeo ITB ke 2. Project ini dibuat dengan menggunakan framework React.js dengan create-react-app dan Flask. 
+Tujuan dari project ini adalah untuk membuat Search Engine sederhana menggunakan metode Term Frequency sebagai aplikasi dot product dan vektor yang dapat menerima inputan file dan melakukan Search query berdasarkan dokumen yang dimasukkan.
 
 ## Screenshots
 ![Halaman Utama](./src/screenshot.jpg)
@@ -25,32 +26,28 @@ Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat 
 * Beautifulsoup - version 4.9.3
 * NLTK - version 3.5
 * regex - version 2020.11.13
+* Dependencies lainnya
 
 ## Setup
-- clone repository ini
-- open folder yang sudah diclone pada vscode
-- buka terminal pada vscode
-  lalu ketik kode berikut
+- git clone
+- yarn install [frontend folder]
+- pipenv install [backend folder] #Jika tidak memiliki pipenv bisa install pipenv dengan pip atau install semua lockfile secara manual(tidak disarankan karena pip menginstall secara global)
   
-  Untuk setup frontend
-   - cd src
-   - cd frontend
-   - install yarn terlebih dahulu jika belum ada
-   - yarn install
+  Untuk menyalakan frontend
+   - Tambahkan file .env yang setara dengan package.json pada folder frontend dan tulis
+      REACT_APP_URL = http://localhost:5000/api jika belum ada
    - yarn start
    
   Untuk setup backend
-   - cd src
-   - cd backend 
-   - install pipenv terlebih dahulu jika belum ada
-   - pip install pipenv
+   - python installSisanya.py (untuk mendownload dictionary nltk)
    - pipenv shell
    - python app.py
-   
+
    
 ## Important
 - 15 file .html sudah ada di folder ../src/backend/static , pada folder testing hanya disediakan 3 file .html
 - Website https://www.worldoftales.com/ yang digunakan untuk webscraping terkadang mengalami down, silakan cek status web di https://www.isitdownrightnow.com/
+- Perbedaan konfigurasi network Anda tidak menjamin bahwa tidak akan mempengaruhi hasil dari webscraping karena bisa ditolak oleh target webscrap
 
 
 ## Features
@@ -64,6 +61,6 @@ Project is: finished.
 
 ## Contact
 Created by 
-- Jesson Gossal Yo (13519079)
+- Jesson Gosal Yo (13519079)
 - Marcello Faria (13519086)
 - Hera Shafira (13519131)
