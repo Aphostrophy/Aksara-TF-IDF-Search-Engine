@@ -30,15 +30,15 @@ Tujuan dari project ini adalah untuk membuat Search Engine sederhana menggunakan
 
 ## Setup
 - git clone
-- yarn install [frontend folder]
-- pipenv install [backend folder] #Jika tidak memiliki pipenv bisa install pipenv dengan pip atau install semua lockfile secara manual(tidak disarankan karena pip menginstall secara global)
+- yarn install di frontend folder
+- pipenv install di backend folder, Jika tidak memiliki pipenv bisa install pipenv dengan pip atau install semua lockfile secara manual(tidak disarankan karena pip menginstall secara global)
   
   Untuk menyalakan frontend
    - Tambahkan file .env yang setara dengan package.json pada folder frontend dan tulis
       REACT_APP_URL = http://localhost:5000/api jika belum ada
    - yarn start
    
-  Untuk setup backend
+  Untuk menyalakan backend
    - python installSisanya.py (untuk mendownload dictionary nltk)
    - pipenv shell
    - python app.py
