@@ -3,6 +3,7 @@ from filtering import Cleaningkata, Cleaningquery, convert, Countwords
 from webscrape import webscrape
 
 
+#Fungsi ini berfungsi untuk menghasilkan vektor terms dari files
 def generateTermsFromFiles(basedir):
     basedir = basedir + "/static"
     multFiles = []
@@ -26,6 +27,7 @@ def generateTermsFromFiles(basedir):
     return generateMatrixFromTerms(fullMatrix, uniqueTerms, multFiles, fileNames)
 
 
+# Fungsi ini berfungsi untuk membangun matrix dari terms yang dihasilkan fungsi sebelumnya
 def generateMatrixFromTerms(fullMatrix, uniqueTerms, multFiles, fileNames):
     elem = dict()
     for keys in uniqueTerms:
@@ -43,6 +45,7 @@ def generateMatrixFromTerms(fullMatrix, uniqueTerms, multFiles, fileNames):
     return [uniqueTerms, fullMatrix, fileNames]
 
 
+#Fungsi ini berfungsi untuk membangun matrix dari vektor terms untuk sumber dokumen dari webscraping
 def generateTermsFromWebscrap():
     fullMatrix = []
     semiFullMatrix = []
@@ -57,7 +60,7 @@ def generateTermsFromWebscrap():
         semiFullMatrix.append(docs)
     return generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs)
 
-
+#Fungsi ini berfungsi untuk membangun matrix dari vektor terms
 def generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs):
     elem = dict()
     for keys in uniqueTerms:
@@ -74,12 +77,13 @@ def generateMatrixFromWebTerms(uniqueTerms, fullMatrix, semiFullMatrix, webs):
     return [uniqueTerms, fullMatrix, webs]
 
 
+#Fungsi ini berfungsi untuk membangun vektor terms dari query yang diberikan dari searching frontend
 def generateQueryVector(query):
     docs = convert(Cleaningquery(query))
     docs = docs.split()
     return Countwords(docs)
 
-
+#Fungsi ini berfungsi untuk memperbaharui terms yang ada di salah satu vektor terms
 def updateTerms(fullMatrix, queryVector):
     newFullMatrix = []
     for docsDict in fullMatrix:
