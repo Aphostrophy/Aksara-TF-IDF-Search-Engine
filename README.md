@@ -7,9 +7,9 @@
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Important] (#important)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
@@ -17,22 +17,29 @@ Project ini merupakan tugas besar Algeo ITB ke 2. Project ini dibuat dengan meng
 Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat menerima inputtan file dan melakukan Search query berdasarkan dokumen yang dimasukkan.
 
 ## Screenshots
-![Halaman Utama](./src/1605465089058.jpg)
+![Halaman Utama](./src/screenshot.jpg)
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Flask - version 1.1.2
+* React.js - version 7.10.4
+* Axios
+* Beautifulsoup - version 4.9.3
+* NLTK - version 3.5
+* regex - version 2020.11.13
 
 ## Setup
-- open folder pada vscode
+- clone repository ini
+- open folder yang sudah diclone pada vscode
 - buka terminal pada vscode
   lalu ketik kode berikut
+  1. Untuk setup frontend
    - cd src
    - cd frontend
-   - yarn 
+   - install yarn terlebih dahulu jika belum ada
+   - yarn install
    - yarn start
- - buka terminal untuk backend
+   
+ 2. Untuk setup backend
    - cd src
    - cd backend 
    - install pipenv terlebih dahulu jika belum ada
@@ -40,12 +47,14 @@ Tujuan dari project ini adalah untuk membuat Search Engine sederhana yang dapat 
    - pipenv shell
    - python app.py
    
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
+   
+## Important
+- 15 file .html sudah ada di folder ../src/backend/static , pada folder testing hanya disediakan 3 file .html
+- Website https://www.worldoftales.com/ yang digunakan untuk webscraping terkadang mengalami down, silakan cek status web di https://www.isitdownrightnow.com/
+
 
 ## Features
-List of features ready and TODOs for future development
+List of features ready and TODOs for future development :
 * Multiple-upload file with drag and drop or onclick features
 * Normal mode and Webscrap mode features 
 * Search query from documents features
@@ -53,11 +62,8 @@ List of features ready and TODOs for future development
 ## Status
 Project is: finished.
 
-## Inspiration
-Add here credits. Project inspired by..., based on...
-
 ## Contact
 Created by 
-- Jesson Gossal Yo
-- Marcello Faria
-- Hera Shafira
+- Jesson Gossal Yo (13519079)
+- Marcello Faria (13519086)
+- Hera Shafira (13519131)
