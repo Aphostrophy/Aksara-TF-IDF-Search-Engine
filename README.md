@@ -45,7 +45,7 @@ Tujuan dari project ini adalah untuk membuat Search Engine sederhana menggunakan
 
    
 ## Important
-- 15 file .html sudah ada di folder ../src/backend/static , pada folder testing hanya disediakan 3 file .html
+- 15 file .html sudah ada di folder ../src/backend/static.
 - Website https://www.worldoftales.com/ yang digunakan untuk webscraping terkadang mengalami down, silakan cek status web di https://www.isitdownrightnow.com/
 - Perbedaan konfigurasi network Anda tidak menjamin bahwa tidak akan mempengaruhi hasil dari webscraping karena bisa ditolak oleh target webscrap
 
